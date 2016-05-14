@@ -9,16 +9,21 @@ import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 /**
  *
  * @author Danielle
  */
 public class Bord extends JPanel implements ActionListener {
+    
+    private Timer timer;
     private Plattegrond kaart;
     private final int IMGBREEDTE = 32; // breedte afbeelding in pixels
     private final int IMGHOOGTE = 32; // breedte afbeelding in pixels
     public Bord() {
+        timer = new Timer(25, this);
+        timer.start();
         kaart = new Plattegrond();
     }
     

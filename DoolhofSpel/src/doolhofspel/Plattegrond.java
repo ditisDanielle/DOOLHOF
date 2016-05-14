@@ -16,7 +16,7 @@ import javax.swing.ImageIcon;
  */
 public class Plattegrond {
     private Scanner file;
-    private final  int MAPGROOTTE = 20;
+    private final  int MAPGROOTTE = 21;
     private String[] map = new String[MAPGROOTTE]; // velden
     private Image gras, muur;
     
@@ -46,7 +46,7 @@ public class Plattegrond {
     }
     public void openFile() {
         try {
-            file = new Scanner(new File("Map.txt"));
+            file = new Scanner(new File("kaart.txt"));
         }
         catch(Exception e) {
             System.out.println("Error loading map!");

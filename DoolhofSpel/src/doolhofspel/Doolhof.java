@@ -17,7 +17,7 @@ class Doolhof {
     JFrame frame = new JFrame();
         frame.setTitle("Zoek je vriend!");
         frame.add(new Bord());
-        frame.setSize(662, 696);
+        frame.setSize(688, 696);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
