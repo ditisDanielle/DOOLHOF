@@ -12,7 +12,6 @@ import javax.swing.Timer;
  *
  * @author Agnita & Danielle (Groep 7)
  */
-
 public class Bord extends JPanel implements ActionListener {
 
     private Timer timer;
@@ -56,8 +55,8 @@ public class Bord extends JPanel implements ActionListener {
                 }
             }
         }
-        
-        g.drawImage(held.getHeld(), held.getVeldX()*32, held.getVeldY()*32, null);
+
+        g.drawImage(held.getHeld(), held.getVeldX() * 32, held.getVeldY() * 32, null);
         //repaint();
     }
 
@@ -65,7 +64,7 @@ public class Bord extends JPanel implements ActionListener {
 
         @Override
         public void keyTyped(KeyEvent e) {
-           //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
 
         @Override
@@ -79,38 +78,45 @@ public class Bord extends JPanel implements ActionListener {
                     if (!kaart.getMap(held.getVeldX() + 1, held.getVeldY()).equals("w")) { // als het object GEEN muur is, dan lopen
                         held.lopen(1, 0);
                         System.out.println("right...");
-                        break;
+
+//                    } else {
+//                        held.lopen(0, 0);
+//                        System.out.println("daar staat een muur sufferd");
                     }
+                    break;
                 case KeyEvent.VK_LEFT:
                     if (kaart.getMap(held.getVeldX() - 1, held.getVeldY()).equals("b")) { // bevat het veld een bazooka?
                         // method bazooka
                         System.out.println("Found bazooka!");
-                    }    
+                    }
                     if (!kaart.getMap(held.getVeldX() - 1, held.getVeldY()).equals("w")) { // als het object GEEN muur is, dan lopen
-                        held.lopen( -1, 0);
+                        held.lopen(-1, 0);
                         System.out.println("left...");
-                        break;
-                    }    
+                        
+                    }
+                break;
                 case KeyEvent.VK_DOWN:
                     if (kaart.getMap(held.getVeldX(), held.getVeldY() + 1).equals("b")) { // bevat het veld een bazooka?
-                        
+
                         // method bazooka
                         System.out.println("Found bazooka!");
-                    }  
+                    }
                     if (!kaart.getMap(held.getVeldX(), held.getVeldY() + 1).equals("w")) { // als het object GEEN muur is, dan lopen
                         held.lopen(0, 1);
                         System.out.println("down...");
-                        break;
-                    }    
+                        
+                    }
+                break;
                 case KeyEvent.VK_UP:
-                    if (kaart.getMap(held.getVeldX(), held.getVeldY() -1).equals("b")) { // bevat het veld een bazooka?
+                    if (kaart.getMap(held.getVeldX(), held.getVeldY() - 1).equals("b")) { // bevat het veld een bazooka?
                         // method bazooka
                         System.out.println("Found bazooka!");
-                    }  
-                    if (!kaart.getMap(held.getVeldX(), held.getVeldY() -1).equals("w")) { // als het object GEEN muur is, dan lopen
+                    }
+                    if (!kaart.getMap(held.getVeldX(), held.getVeldY() - 1).equals("w")) { // als het object GEEN muur is, dan lopen
                         held.lopen(0, -1);
                         System.out.println("up...");
-                    }    
+                    }
+                break;
             }
         }
 
