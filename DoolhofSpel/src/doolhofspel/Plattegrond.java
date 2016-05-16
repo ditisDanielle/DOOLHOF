@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package doolhofspel;
 
 import java.awt.Image;
@@ -12,19 +7,24 @@ import javax.swing.ImageIcon;
 
 /**
  *
- * @author Danielle
+ * @author Agnita & Danielle (Groep 7)
  */
+
 public class Plattegrond {
     private Scanner file;
     private final  int MAPGROOTTE = 21;
     private String[] map = new String[MAPGROOTTE]; // velden
-    private Image gras, muur;
+    private Image gras, muur, bazooka, finish;
     
     public Plattegrond() {
         ImageIcon img = new ImageIcon("Pictures//gras.png");
         gras = img.getImage(); // 32x32 pixel icons
-        img = new ImageIcon("Pictures//muur.png");
+        img = new ImageIcon("Pictures//brickwall.png");
         muur = img.getImage();
+        img = new ImageIcon("Pictures//bazooka.png");
+        bazooka = img.getImage();
+        img = new ImageIcon("Pictures//finish.png");
+        finish = img.getImage();
         
         openFile();
         readFile();
@@ -39,6 +39,12 @@ public class Plattegrond {
     }
     public Image getMuur() {
         return muur;
+    }
+    public Image getBazooka() {
+        return bazooka;
+    }
+    public Image getFinish() {
+        return finish;
     }
     public String getMap(int x, int y) {
         String index = map[y].substring(x, x+1);

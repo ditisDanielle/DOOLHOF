@@ -7,12 +7,11 @@ import java.awt.Image;
  * @author Agnita & Danielle (Groep 7)
  */
 
-public abstract class Veldbezetting {
+public abstract class Tempbezetting {
     private Image afbeelding;
     private int positie [][];
     
-    public Veldbezetting(){
+    public Tempbezetting() {
     
-}
-    
+    }
 }

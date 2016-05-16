@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package doolhofspel;
 
 import java.awt.Graphics;
@@ -10,19 +5,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
 /**
  *
- * @author Danielle
+ * @author Agnita & Danielle (Groep 7)
  */
+
 public class Bord extends JPanel implements ActionListener {
 
     private Timer timer;
     private Plattegrond kaart;
     private Held held;
+    private Bazooka bazooka;
     private final int IMGBREEDTE = 32; // breedte afbeelding in pixels
     private final int IMGHOOGTE = 32; // breedte afbeelding in pixels
 
@@ -31,6 +27,7 @@ public class Bord extends JPanel implements ActionListener {
         timer.start();
         kaart = new Plattegrond();
         held = new Held();
+        bazooka = new Bazooka();
         addKeyListener(new PijltjesListener());
         setFocusable(true);
     }
@@ -51,6 +48,12 @@ public class Bord extends JPanel implements ActionListener {
                 if (kaart.getMap(x, y).equals("w")) {
                     g.drawImage(kaart.getMuur(), x * IMGBREEDTE, y * IMGHOOGTE, null); // het aantal pixels van het plaatje
                 }
+                if (kaart.getMap(x, y).equals("b")) {
+                    g.drawImage(kaart.getBazooka(), x * IMGBREEDTE, y * IMGHOOGTE, null); // het aantal pixels van het plaatje
+                }
+                if (kaart.getMap(x, y).equals("f")) {
+                    g.drawImage(kaart.getFinish(), x * IMGBREEDTE, y * IMGHOOGTE, null); // het aantal pixels van het plaatje
+                }
             }
         }
         
@@ -67,23 +70,47 @@ public class Bord extends JPanel implements ActionListener {
 
         @Override
         public void keyPressed(KeyEvent e) {
-            //int keyCode = e.getKeyCode();
             switch (e.getKeyCode()) {
                 case KeyEvent.VK_RIGHT:
-                    held.lopen(1, 0);
-                    System.out.println("right...");
-                    break;
+                    if (kaart.getMap(held.getVeldX() + 1, held.getVeldY()).equals("b")) { // bevat het veld een bazooka?
+                        // method bazooka
+                        System.out.println("Found bazooka!");
+                    }
+                    if (!kaart.getMap(held.getVeldX() + 1, held.getVeldY()).equals("w")) { // als het object GEEN muur is, dan lopen
+                        held.lopen(1, 0);
+                        System.out.println("right...");
+                        break;
+                    }
                 case KeyEvent.VK_LEFT:
-                    held.lopen( -1, 0);
-                    System.out.println("left...");
-                    break;
+                    if (kaart.getMap(held.getVeldX() - 1, held.getVeldY()).equals("b")) { // bevat het veld een bazooka?
+                        // method bazooka
+                        System.out.println("Found bazooka!");
+                    }    
+                    if (!kaart.getMap(held.getVeldX() - 1, held.getVeldY()).equals("w")) { // als het object GEEN muur is, dan lopen
+                        held.lopen( -1, 0);
+                        System.out.println("left...");
+                        break;
+                    }    
                 case KeyEvent.VK_DOWN:
-                    held.lopen(0, 1);
-                    System.out.println("down...");
-                    break;
+                    if (kaart.getMap(held.getVeldX(), held.getVeldY() + 1).equals("b")) { // bevat het veld een bazooka?
+                        
+                        // method bazooka
+                        System.out.println("Found bazooka!");
+                    }  
+                    if (!kaart.getMap(held.getVeldX(), held.getVeldY() + 1).equals("w")) { // als het object GEEN muur is, dan lopen
+                        held.lopen(0, 1);
+                        System.out.println("down...");
+                        break;
+                    }    
                 case KeyEvent.VK_UP:
-                    held.lopen(0, -1);
-                    System.out.println("up...");
+                    if (kaart.getMap(held.getVeldX(), held.getVeldY() -1).equals("b")) { // bevat het veld een bazooka?
+                        // method bazooka
+                        System.out.println("Found bazooka!");
+                    }  
+                    if (!kaart.getMap(held.getVeldX(), held.getVeldY() -1).equals("w")) { // als het object GEEN muur is, dan lopen
+                        held.lopen(0, -1);
+                        System.out.println("up...");
+                    }    
             }
         }
 
