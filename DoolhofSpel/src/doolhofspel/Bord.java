@@ -53,6 +53,9 @@ public class Bord extends JPanel implements ActionListener {
                 if (kaart.getMap(x, y).equals("f")) {
                     g.drawImage(kaart.getFinish(), x * IMGBREEDTE, y * IMGHOOGTE, null); // het aantal pixels van het plaatje
                 }
+                if (kaart.getMap(x, y).equals("s")) {
+                    g.drawImage(kaart.getStart(), x * IMGBREEDTE, y * IMGHOOGTE, null); // het aantal pixels van het plaatje
+                }
             }
         }
 
@@ -85,6 +88,10 @@ public class Bord extends JPanel implements ActionListener {
                     }
                     break;
                 case KeyEvent.VK_LEFT:
+                    if (kaart.getMap(held.getVeldX() - 1, held.getVeldY()).equals("s")) { // is het begin van de Game?
+                        System.out.println("Niet lopen, je zit bij de start");
+                        break;
+                    }
                     if (kaart.getMap(held.getVeldX() - 1, held.getVeldY()).equals("b")) { // bevat het veld een bazooka?
                         // method bazooka
                         System.out.println("Found bazooka!");

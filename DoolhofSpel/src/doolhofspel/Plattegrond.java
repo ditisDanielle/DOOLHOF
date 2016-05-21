@@ -14,7 +14,7 @@ public class Plattegrond {
     private Scanner file;
     private final  int MAPGROOTTE = 21;
     private String[] map = new String[MAPGROOTTE]; // velden
-    private Image gras, muur, bazooka, finish;
+    private Image gras, muur, bazooka, finish, start;
     
     public Plattegrond() {
         ImageIcon img = new ImageIcon("Pictures//gras.png");
@@ -25,6 +25,8 @@ public class Plattegrond {
         bazooka = img.getImage();
         img = new ImageIcon("Pictures//finish.png");
         finish = img.getImage();
+        img = new ImageIcon("Pictures//start.png");
+        start = img.getImage();
         
         openFile();
         readFile();
@@ -46,6 +48,10 @@ public class Plattegrond {
     public Image getFinish() {
         return finish;
     }
+    public Image getStart() {
+        return start;
+    }
+    
     public String getMap(int x, int y) {
         String index = map[y].substring(x, x+1);
         return index;
