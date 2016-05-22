@@ -51,7 +51,7 @@ public class Bord extends JPanel implements ActionListener {
                     g.drawImage(kaart.getBazooka(), x * IMGBREEDTE, y * IMGHOOGTE, null); // het aantal pixels van het plaatje
                 }
                 if (kaart.getMap(x, y).equals("f")) {
-                    g.drawImage(kaart.getFinish(), x * IMGBREEDTE, y * IMGHOOGTE, null); // het aantal pixels van het plaatje
+                    g.drawImage(kaart.getVriend(), x * IMGBREEDTE, y * IMGHOOGTE, null); // het aantal pixels van het plaatje
                 }
                 if (kaart.getMap(x, y).equals("s")) {
                     g.drawImage(kaart.getStart(), x * IMGBREEDTE, y * IMGHOOGTE, null); // het aantal pixels van het plaatje
@@ -81,13 +81,10 @@ public class Bord extends JPanel implements ActionListener {
                     if (!kaart.getMap(held.getVeldX() + 1, held.getVeldY()).equals("w")) { // als het object GEEN muur is, dan lopen
                         held.lopen(1, 0);
                         System.out.println("right...");
-
-//                    } else {
-//                        held.lopen(0, 0);
-//                        System.out.println("daar staat een muur sufferd");
                     }
                     break;
                 case KeyEvent.VK_LEFT:
+                    // let op: toevoegen aan alle keyacties, startveld positie kan wijzigen!
                     if (kaart.getMap(held.getVeldX() - 1, held.getVeldY()).equals("s")) { // is het begin van de Game?
                         System.out.println("Niet lopen, je zit bij de start");
                         break;
