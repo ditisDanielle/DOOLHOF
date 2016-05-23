@@ -74,6 +74,10 @@ public class Bord extends JPanel implements ActionListener {
         public void keyPressed(KeyEvent e) {
             switch (e.getKeyCode()) {
                 case KeyEvent.VK_RIGHT:
+                    if (kaart.getMap(held.getVeldX() + 1, held.getVeldY()).equals("f")) { // vriend gevonden!
+                        System.out.println("Vriend gevonden!!!");
+                        break;
+                    }
                     if (kaart.getMap(held.getVeldX() + 1, held.getVeldY()).equals("b")) { // bevat het veld een bazooka?
                         // method bazooka
                         System.out.println("Found bazooka!");
@@ -84,6 +88,10 @@ public class Bord extends JPanel implements ActionListener {
                     }
                     break;
                 case KeyEvent.VK_LEFT:
+                    if (kaart.getMap(held.getVeldX() - 1, held.getVeldY()).equals("f")) { // vriend gevonden!
+                        System.out.println("Vriend gevonden!!!");
+                        break;
+                    }
                     // let op: toevoegen aan alle keyacties, startveld positie kan wijzigen!
                     if (kaart.getMap(held.getVeldX() - 1, held.getVeldY()).equals("s")) { // is het begin van de Game?
                         System.out.println("Niet lopen, je zit bij de start");
@@ -100,6 +108,10 @@ public class Bord extends JPanel implements ActionListener {
                     }
                 break;
                 case KeyEvent.VK_DOWN:
+                     if (kaart.getMap(held.getVeldX(), held.getVeldY() + 1).equals("f")) { // vriend gevonden!
+                        System.out.println("Vriend gevonden!!!");
+                        break;
+                    }
                     if (kaart.getMap(held.getVeldX(), held.getVeldY() + 1).equals("b")) { // bevat het veld een bazooka?
                         // method bazooka
                         System.out.println("Found bazooka!");
@@ -110,6 +122,10 @@ public class Bord extends JPanel implements ActionListener {
                     }
                 break;
                 case KeyEvent.VK_UP:
+                     if (kaart.getMap(held.getVeldX(), held.getVeldY() -1).equals("f")) { // vriend gevonden!
+                        System.out.println("Vriend gevonden!!!");
+                        break;
+                    }
                     if (kaart.getMap(held.getVeldX(), held.getVeldY() - 1).equals("b")) { // bevat het veld een bazooka?
                         // method bazooka
                         System.out.println("Found bazooka!");
