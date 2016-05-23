@@ -101,14 +101,12 @@ public class Bord extends JPanel implements ActionListener {
                 break;
                 case KeyEvent.VK_DOWN:
                     if (kaart.getMap(held.getVeldX(), held.getVeldY() + 1).equals("b")) { // bevat het veld een bazooka?
-
                         // method bazooka
                         System.out.println("Found bazooka!");
                     }
                     if (!kaart.getMap(held.getVeldX(), held.getVeldY() + 1).equals("w")) { // als het object GEEN muur is, dan lopen
                         held.lopen(0, 1);
                         System.out.println("down...");
-                        
                     }
                 break;
                 case KeyEvent.VK_UP:

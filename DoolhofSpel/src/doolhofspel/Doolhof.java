@@ -21,12 +21,13 @@ class Doolhof {
         frame.setTitle("Zoek je vriend!");
         frame.add(new Bord());
         frame.setSize(1000, 1000);
-//      frame.setSize(694, 728); // eerste int is breedte, tweede is lengte, deze maat graag even bewaren!
+        // frame.setSize(694, 728); // eerste int is breedte, tweede is lengte, deze maat graag even bewaren!
+        // beter is om de framesize relatief te maken aan de plaatjes (32x32)
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // maak de gamepanel
         JPanel gamepanel = new JPanel(new BorderLayout());
-        // twee fakepanels, nodig voor de layout (north & south
+        // twee fakepanels, nodig voor de layout (north & south)
         JPanel north = new JPanel();
         north.setPreferredSize(new Dimension(5, 50));
         JPanel south = new JPanel();
@@ -59,7 +60,7 @@ class Doolhof {
         gamepanel.add(south, BorderLayout.SOUTH);
         gamepanel.add(buttonPanel, BorderLayout.EAST);
         gamepanel.add(west, BorderLayout.WEST);
-        // als laatste voegen we de gamepanel toe aan de gamframe en zorgen we dat het zichtbaar is
+        // als laatste voegen we de gamepanel toe aan de gameframe en zorgen we dat het zichtbaar is
         frame.add(gamepanel);
         frame.setVisible(true);
     }
