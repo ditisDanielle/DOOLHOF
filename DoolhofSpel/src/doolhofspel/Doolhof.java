@@ -2,6 +2,7 @@ package doolhofspel;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Frame;
 import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -23,15 +24,17 @@ class Doolhof {
     JPanel dummy2;
     JPanel dummy3;
     JPanel dummy4;
+    JPanel centerdummy;
     JButton reset;
 /// BUTTON IN EEN APARTE PANEL > PANEL IN CENTER VAN BORDERLAYOUT BUTTONPANEL 
-    
-    
+
     public Doolhof() {
         // maak een gameframe
         spelframe = new JFrame();
         spelframe.setTitle("Zoek je vriend!");
-        spelframe.setSize(1000, 1000);
+        //spelframe.setSize(1000, 1000);
+        	
+        spelframe.setExtendedState(Frame.MAXIMIZED_BOTH);
         spelframe.setLocationRelativeTo(null);
         spelframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -44,11 +47,9 @@ class Doolhof {
         reset = new JButton();
         reset.setSize(buttonSizeHeight, buttonSizesWidth);
         reset.setText("Reset");
-        
+
         // actie toevoegen aan de resetbutton!
         reset.addActionListener(null);
-
-        buttonpanel.add(reset, BorderLayout.CENTER);
 
         // dummy panels toevoegen ivm de layout
         dummy1 = new JPanel();
@@ -63,6 +64,11 @@ class Doolhof {
         dummy4 = new JPanel();
         dummy4.setPreferredSize(new Dimension(50, 350));
         buttonpanel.add(dummy4, BorderLayout.WEST);
+
+        centerdummy = new JPanel();
+        centerdummy.setPreferredSize(new Dimension(50, 350));
+        buttonpanel.add(centerdummy, BorderLayout.CENTER);
+        centerdummy.add(reset, BorderLayout.CENTER);
 
         // alle panels toevoegen aan het uiteindelijke gamepanel
         gamepanel.add(new Bord());
