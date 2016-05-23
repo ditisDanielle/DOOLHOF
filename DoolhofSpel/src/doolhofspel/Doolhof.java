@@ -19,7 +19,6 @@ class Doolhof {
         // maak een gameframe
         JFrame frame = new JFrame();
         frame.setTitle("Zoek je vriend!");
-        frame.add(new Bord());
         frame.setSize(1000, 1000);
         // frame.setSize(694, 728); // eerste int is breedte, tweede is lengte, deze maat graag even bewaren!
         // beter is om de framesize relatief te maken aan de plaatjes (32x32)
@@ -31,7 +30,7 @@ class Doolhof {
         JPanel north = new JPanel();
         north.setPreferredSize(new Dimension(5, 50));
         JPanel south = new JPanel();
-        south.setPreferredSize(new Dimension(5, 5));
+        south.setPreferredSize(new Dimension(5, 250));
         // een buttonpanel voor de start en de reset buttons
         JPanel buttonPanel = new JPanel(new BorderLayout());
         // startbutton toevoegen
