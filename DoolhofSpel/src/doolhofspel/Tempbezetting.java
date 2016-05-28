@@ -39,4 +39,8 @@ public abstract class Tempbezetting extends Veldbezetting{
         return y = super.getY(y);
     }
     
+    public void verdwijnen(){
+        
+    }
+    
 }

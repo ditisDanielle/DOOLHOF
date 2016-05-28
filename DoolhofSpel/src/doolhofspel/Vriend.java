@@ -9,15 +9,12 @@ import javax.swing.ImageIcon;
  */
 
 public class Vriend extends Veldbezetting {
-    private int veldX;
-    private int veldY;
-    private Image vriend;
+        // waarden 1 nog vervangen door variabelenaam
     
     public Vriend(){
         ImageIcon img = new ImageIcon("Pictures//vriend.png");
-        vriend = img.getImage();
-        veldX = 1;
-        veldY = 1;
+        super.setImage(img.getImage());
+        super.setPositie(1,1);
     }
     
 }

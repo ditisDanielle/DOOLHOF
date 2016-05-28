@@ -9,29 +9,38 @@ import javax.swing.ImageIcon;
  */
 
 public class Held extends Veldbezetting{
-    
-    private int veldX;
-    private int veldY;
-    private Image held;
-    
-    
+     // waarden 1 nog vervangen door variabelenaam
     public Held(){
-        ImageIcon img = new ImageIcon("Pictures//held.png");
-        held = img.getImage();
-        veldX = 1;
-        veldY = 1;
+      ImageIcon img = new ImageIcon("Pictures//held.png");
+        super.setImage(img.getImage());
+        super.setPositie(1,1);
     }
+    
     public Image getHeld(){
-        return held;
+        Image held;
+        Image vb = null;
+        return held = super.getImage(vb);
     }
-    public int getVeldX(){
-        return veldX;
+    
+     public int getVeldX(){
+        return super.getX(1);
     }
+     
     public int getVeldY(){
-        return veldY;
+        return super.getY(1);
     }
+    
     public void lopen (int vx, int vy){
-        this.veldX += vx;
-        this.veldY += vy;
+        vx += getX(vx);
+        vy += getY(vy);
+        super.setPositie(vx,vy);
+    }
+    
+    public void schieten(){
+        
+    }
+    
+    public void bazookaPakken(){
+        
     }
 }

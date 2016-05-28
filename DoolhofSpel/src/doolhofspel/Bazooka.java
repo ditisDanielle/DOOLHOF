@@ -18,17 +18,9 @@ public class Bazooka extends Tempbezetting {
         super.setPositie(1,1);
     }
     
-    // haal afbeelding op uit Tempbezetting
-    public Image getBazooka(Image afbeelding){
-        return afbeelding;
-    }
+  
     
-    
-    // waarden 1 nog vervangen door variabelenaam
-    public int getVeldX(){
-        return super.getX(1);
-    }
-    public int getVeldY(){
-        return super.getY(1);
+    public void muurVernietigen(){
+        
     }
 }
