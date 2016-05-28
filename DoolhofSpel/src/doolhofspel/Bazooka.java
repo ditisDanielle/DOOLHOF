@@ -9,28 +9,26 @@ import javax.swing.ImageIcon;
  */
 
 public class Bazooka extends Tempbezetting {
-    private int veldX, veldY;
-    private Image bazooka;
-    
+        
+    //constructor
+     // waarden 1 nog vervangen door variabelenaam
     public Bazooka() {
         ImageIcon img = new ImageIcon("Pictures//bazooka.png");
-        bazooka = img.getImage();
-        veldX = 1;
-        veldY = 1;
+        super.setImage(img.getImage());
+        super.setPositie(1,1);
     }
-    public Image getBazooka(){
-        return bazooka;
+    
+    // haal afbeelding op uit Tempbezetting
+    public Image getBazooka(Image afbeelding){
+        return afbeelding;
     }
+    
+    
+    // waarden 1 nog vervangen door variabelenaam
     public int getVeldX(){
-        return this.veldX;
+        return super.getX(1);
     }
     public int getVeldY(){
-        return this.veldY;
-    }
-    public void setVeldX(int x){
-        this.veldX = x;
-    }
-    public void setVeldY(int y) {
-        this.veldY = y;
+        return super.getY(1);
     }
 }

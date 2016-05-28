@@ -9,10 +9,32 @@ import java.awt.Image;
 
 public abstract class Veldbezetting {
     private Image afbeelding;
-    private int positie [][];
+    private int veldX, veldY;
+
     
     public Veldbezetting(){
     
 }
+    
+    public void setImage(Image afbeelding){
+      this.afbeelding = afbeelding;
+    }
+    
+    public Image getImage(Image afbeelding){
+        return afbeelding = this.afbeelding;
+    }
+    
+    public void setPositie(int x, int y){
+        this.veldX = x;
+        this.veldY = y;
+    }
+    
+    public int getX(int x){
+        return x = this.veldX;
+    }
+    
+    public int getY(int y){
+        return y = this.veldY;
+    }
     
 }
