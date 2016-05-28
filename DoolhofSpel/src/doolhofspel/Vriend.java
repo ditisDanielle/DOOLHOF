@@ -17,4 +17,11 @@ public class Vriend extends Veldbezetting {
         super.setPositie(1,1);
     }
     
+public Image getVriendImage(){
+        Image vb = null;
+        Image vriend = super.getImage(vb);
+        return vriend;
+    }
+
 }
+

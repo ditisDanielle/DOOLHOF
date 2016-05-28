@@ -5,6 +5,7 @@
  */
 package doolhofspel;
 
+import java.awt.Image;
 import javax.swing.ImageIcon;
 
 /**
@@ -17,6 +18,12 @@ public class Muur extends Tempbezetting {
         ImageIcon img = new ImageIcon("Pictures//brickwall.png");
         super.setImage(img.getImage());
         super.setPositie(1,1);
+    }
+        
+        public Image getMuurImage(){
+        Image vb = null;
+        Image muur = super.getImage(vb);
+        return muur;
     }
     
 }

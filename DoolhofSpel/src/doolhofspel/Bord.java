@@ -19,6 +19,7 @@ public class Bord extends JPanel implements ActionListener {
     private Plattegrond kaart;
     private Held held;
     private Bazooka bazooka;
+    private Vriend vriend;
     private final int IMGBREEDTE = 32; // breedte afbeelding in pixels
     private final int IMGHOOGTE = 32; // breedte afbeelding in pixels
 
@@ -28,6 +29,7 @@ public class Bord extends JPanel implements ActionListener {
         kaart = new Plattegrond();
         held = new Held();
         bazooka = new Bazooka();
+        vriend = new Vriend();
         addKeyListener(new PijltjesListener());
         setFocusable(true);
     }
@@ -96,7 +98,7 @@ public class Bord extends JPanel implements ActionListener {
                 case KeyEvent.VK_LEFT:
                     if (kaart.getMap(held.getVeldX() - 1, held.getVeldY()).equals("f")) {
                         System.out.println("Vriend gevonden!!!");
-                       break;
+                        break;
                     }
                     // let op: toevoegen aan alle keyacties, startveld positie kan wijzigen!
                     if (kaart.getMap(held.getVeldX() - 1, held.getVeldY()).equals("s")) {
@@ -119,7 +121,7 @@ public class Bord extends JPanel implements ActionListener {
                         System.out.println("Vriend gevonden!!!");
                         break;
                     }
-                    if (kaart.getMap(held.getVeldX(), held.getVeldY()+1).equals("s")) {
+                    if (kaart.getMap(held.getVeldX(), held.getVeldY() + 1).equals("s")) {
                         System.out.println("Niet lopen, je zit bij de start");
                         break;
                     }
@@ -138,7 +140,7 @@ public class Bord extends JPanel implements ActionListener {
                         System.out.println("Vriend gevonden!!!");
                         break;
                     }
-                    if (kaart.getMap(held.getVeldX(), held.getVeldY()-1).equals("s")) {
+                    if (kaart.getMap(held.getVeldX(), held.getVeldY() - 1).equals("s")) {
                         System.out.println("Niet lopen, je zit bij de start");
                         break;
                     }

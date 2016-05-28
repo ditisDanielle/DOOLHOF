@@ -5,6 +5,7 @@
  */
 package doolhofspel;
 
+import java.awt.Image;
 import javax.swing.ImageIcon;
 
 /**
@@ -17,6 +18,12 @@ public class Gras extends Veldbezetting {
         ImageIcon img = new ImageIcon("Pictures//gras.png");
         super.setImage(img.getImage());
         super.setPositie(1,1);
+    }
+    
+    public Image getGrasImage(){
+        Image vb = null;
+        Image gras = super.getImage(vb);
+        return gras;
     }
     
 }

@@ -14,17 +14,12 @@ public class Plattegrond {
     private Scanner file;
     private final  int MAPGROOTTE = 21;
     private String[] map = new String[MAPGROOTTE]; // velden
-    private Image gras, muur, bazooka, vriend, start;
+    private Image start;
     
     public Plattegrond() {
-        ImageIcon img = new ImageIcon("Pictures//gras.png");
-        gras = img.getImage(); // 32x32 pixel icons
-        img = new ImageIcon("Pictures//brickwall.png");
-        muur = img.getImage();
-        img = new ImageIcon("Pictures//bazooka.png");
-        bazooka = img.getImage();
-        img = new ImageIcon("Pictures//vriend.png");
-        vriend = img.getImage();
+        ImageIcon img;
+        // KLASSE START maken???? nee toch? hoe dan dit oplossen? 
+        // of start gewoon weglaten. start is waar held staat aan begin van het veld
         img = new ImageIcon("Pictures//start.png");
         start = img.getImage();
         
@@ -37,17 +32,20 @@ public class Plattegrond {
         return this.MAPGROOTTE;
     }
     public Image getGras() {
-        return gras;
+        Gras gras = new Gras();
+        return gras.getGrasImage();
     }
     public Image getMuur() {
-        return muur;
+        Muur muur = new Muur();
+        return muur.getMuurImage();
     }
     public Image getBazooka() {
-        return bazooka;
+        Bazooka bazooka = new Bazooka();
+        return bazooka.getBazookaImage();
     }
     public Image getVriend() {
-        // vriend moet een object worden!
-        return vriend;
+        Vriend vriend = new Vriend();
+        return vriend.getVriendImage();
     }
     public Image getStart() {
         return start;
