@@ -12,6 +12,7 @@ import javax.swing.JPanel;
  *
  * @author Agnita & Danielle (Groep 7)
  */
+
 class Doolhof {
 
     int buttonSizeHeight = 1; // later FINAL maken

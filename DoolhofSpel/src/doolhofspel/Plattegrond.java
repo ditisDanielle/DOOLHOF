@@ -27,7 +27,6 @@ public class Plattegrond {
         readFile();
         closeFile();
     }
-    
     public int getMapgrootte(){
         return this.MAPGROOTTE;
     }
@@ -50,7 +49,6 @@ public class Plattegrond {
     public Image getStart() {
         return start;
     }
-    
     public String getMap(int x, int y) {
         String index = map[y].substring(x, x+1);
         return index;
@@ -62,7 +60,6 @@ public class Plattegrond {
         catch(Exception e) {
             System.out.println("Error loading map!");
         }
-        
     }
     public void readFile() {
         while (file.hasNext()) {
@@ -74,5 +71,4 @@ public class Plattegrond {
     public void closeFile() {
         file.close();
     }
-    
 }

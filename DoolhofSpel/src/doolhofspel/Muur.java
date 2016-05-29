@@ -19,7 +19,7 @@ public class Muur extends Tempbezetting {
         super.setImage(img.getImage());
         super.setPositie(1,1);
     }
-        
+    
         public Image getMuurImage(){
         Image vb = null;
         Image muur = super.getImage(vb);
