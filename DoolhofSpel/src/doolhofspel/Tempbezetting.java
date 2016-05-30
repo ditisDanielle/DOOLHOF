@@ -20,8 +20,8 @@ public abstract class Tempbezetting extends Veldbezetting{
     }
     
     @Override
-    public Image getImage(Image tempAfbeelding){
-        return tempAfbeelding = super.getImage(tempAfbeelding);
+    public Image getImage(){
+        return super.getImage();
     }
     
     @Override

@@ -20,7 +20,7 @@ public class Bazooka extends Tempbezetting {
     
    public Image getBazookaImage(){
         Image vb = null;
-        Image bazooka = super.getImage(vb);
+        Image bazooka = super.getImage();
         return bazooka;
     }
     

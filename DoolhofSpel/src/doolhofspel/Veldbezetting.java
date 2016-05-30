@@ -20,7 +20,7 @@ public abstract class Veldbezetting {
       this.afbeelding = afbeelding;
     }
     
-    public Image getImage(Image vb){
+    public Image getImage(){
         return afbeelding = this.afbeelding;
     }
     

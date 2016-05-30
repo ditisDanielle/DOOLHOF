@@ -22,7 +22,7 @@ public class Gras extends Veldbezetting {
     
     public Image getGrasImage(){
         Image vb = null;
-        Image gras = super.getImage(vb);
+        Image gras = super.getImage();
         return gras;
     }
     

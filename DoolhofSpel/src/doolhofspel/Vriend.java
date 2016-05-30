@@ -19,7 +19,7 @@ public class Vriend extends Veldbezetting {
     
 public Image getVriendImage(){
         Image vb = null;
-        Image vriend = super.getImage(vb);
+        Image vriend = super.getImage();
         return vriend;
     }
 

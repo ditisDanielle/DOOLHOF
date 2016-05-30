@@ -69,8 +69,9 @@ public class Bord extends JPanel implements ActionListener {
                         mapObjects.add(bazooka);
                     }
                     if (kaart.getMap(x, y).equals("f")) {
-                        g.drawImage(kaart.getVriend(), x * IMGBREEDTE, y * IMGHOOGTE, null);
-                        Object vriend = new Vriend();
+                        
+                        Vriend vriend = new Vriend();
+                        g.drawImage(vriend.getImage(), x * IMGBREEDTE, y * IMGHOOGTE, null);
                         mapObjects.add(vriend);
                     }        
                     if (kaart.getMap(x, y).equals("s")) {

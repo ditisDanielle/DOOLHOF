@@ -22,7 +22,7 @@ public class Muur extends Tempbezetting {
     
         public Image getMuurImage(){
         Image vb = null;
-        Image muur = super.getImage(vb);
+        Image muur = super.getImage();
         return muur;
     }
     
