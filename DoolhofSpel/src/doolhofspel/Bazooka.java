@@ -18,12 +18,7 @@ public class Bazooka extends Tempbezetting {
         super.setPositie(1,1);
     }
     
-   public Image getBazookaImage(){
-        Image vb = null;
-        Image bazooka = super.getImage();
-        return bazooka;
-    }
-    
+      
     public void muurVernietigen(){
         
     }

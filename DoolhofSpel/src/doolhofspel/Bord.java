@@ -80,7 +80,7 @@ public class Bord extends JPanel implements ActionListener {
                 }
             }
         }    
-        g.drawImage(held.getHeld(), held.getVeldX() * 32, held.getVeldY() * 32, null);
+        g.drawImage(held.getImage(), held.getVeldX() * 32, held.getVeldY() * 32, null);
         //repaint();
     }
 
@@ -118,6 +118,7 @@ public class Bord extends JPanel implements ActionListener {
             }
             // even een aparte method gemaakt, om het overzichtelijk te houden
             lopen(stapX, stapY);
+            repaint();
         }  
 
         public void lopen(int stapX, int stapY) {

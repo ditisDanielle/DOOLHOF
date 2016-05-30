@@ -20,10 +20,5 @@ public class Gras extends Veldbezetting {
         super.setPositie(1,1);
     }
     
-    public Image getGrasImage(){
-        Image vb = null;
-        Image gras = super.getImage();
-        return gras;
-    }
-    
+        
 }

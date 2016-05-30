@@ -32,19 +32,19 @@ public class Plattegrond {
     }
     public Image getGras() {
         Gras gras = new Gras();
-        return gras.getGrasImage();
+        return gras.getImage();
     }
     public Image getMuur() {
         Muur muur = new Muur();
-        return muur.getMuurImage();
+        return muur.getImage();
     }
     public Image getBazooka() {
         Bazooka bazooka = new Bazooka();
-        return bazooka.getBazookaImage();
+        return bazooka.getImage();
     }
     public Image getVriend() {
         Vriend vriend = new Vriend();
-        return vriend.getVriendImage();
+        return vriend.getImage();
     }
     public Image getStart() {
         return start;

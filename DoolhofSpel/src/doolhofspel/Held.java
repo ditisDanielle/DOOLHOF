@@ -15,13 +15,7 @@ public class Held extends Veldbezetting{
         super.setImage(img.getImage());
         super.setPositie(1,1);
     }
-    
-    public Image getHeld(){
-        Image held;
-        Image vb = null;
-        return held = super.getImage();
-    }
-    
+        
      public int getVeldX(){
         return super.getX(1);
     }
