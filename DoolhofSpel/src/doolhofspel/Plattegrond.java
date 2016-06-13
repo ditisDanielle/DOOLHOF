@@ -2,6 +2,7 @@ package doolhofspel;
 
 import java.awt.Image;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.ImageIcon;
 
@@ -12,9 +13,11 @@ import javax.swing.ImageIcon;
 
 public class Plattegrond {
     private Scanner file;
-    private final  int MAPGROOTTE = 21;
-    private String[] map = new String[MAPGROOTTE]; // velden
+    private final int MAPGROOTTE = 21;
+    //private String[] map = new String[MAPGROOTTE * MAPGROOTTE]; // velden
     private Image start;
+    public ArrayList<Veldbezetting> mapObjects = new ArrayList<>();
+    //private Plattegrond kaart;
     
     public Plattegrond() {
         ImageIcon img;
@@ -22,7 +25,7 @@ public class Plattegrond {
         // of start gewoon weglaten. start is waar held staat aan begin van het veld
         img = new ImageIcon("Pictures//start.png");
         start = img.getImage();
-        
+        //kaart = new Plattegrond();
         openFile();
         readFile();
         closeFile();
@@ -49,9 +52,10 @@ public class Plattegrond {
     public Image getStart() {
         return start;
     }
-    public String getMap(int x, int y) {
-        String index = map[y].substring(x, x+1);
-        return index;
+    
+    public Veldbezetting getMap(int x, int y) {
+        int index = x * (MAPGROOTTE) + y;
+        return mapObjects.get(index);
     }
     public void openFile() {
         try {
@@ -62,12 +66,35 @@ public class Plattegrond {
         }
     }
     public void readFile() {
-        while (file.hasNext()) {
-            for (int i = 0; i < map.length; i++) {  
-                map[i] = file.next();
-            }
+        int aantal = getMapgrootte();
+        for (int z = 0; z < MAPGROOTTE; z++) {
+            String line = file.next();
+            for (int y = 0; y < MAPGROOTTE; y++) {
+                String veld = line.substring(y,y+1);
+                    if (veld.equals("g")) {
+                        Gras gras = new Gras();
+                        mapObjects.add(gras);
+                    }
+                    if (veld.equals("w")) {
+                        Muur muur = new Muur();
+                        mapObjects.add(muur);
+                    }
+                    if (veld.equals("b")) {
+                        Bazooka bazooka = new Bazooka();
+                        mapObjects.add(bazooka);
+                    }
+                    if (veld.equals("f")) {
+                        Vriend vriend = new Vriend();
+                        mapObjects.add(vriend);
+                    }        
+                     if (veld.equals("s")) {
+                        Vriend vriend = new Vriend();
+                        mapObjects.add(vriend);
+                    }
+                }
+            //}        
         }
-    }
+    }        
     public void closeFile() {
         file.close();
     }

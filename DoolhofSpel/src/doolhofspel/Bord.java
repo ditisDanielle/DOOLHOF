@@ -43,45 +43,34 @@ public class Bord extends JPanel implements ActionListener {
 
     public void paint(Graphics g) {
         super.paint(g);
-        int aantal = kaart.getMapgrootte();
-         for (int y = 0; y < aantal; y++) {
-            for (int x = 0; x < aantal; x++) {
-                for (int i = 0; i < aantal; i++) {     
-                    // volgens mij doen we het niet goed
-                    // we moeten objecten in een array zetten, en die moeten worden uitgelezen
-                    // en wellicht ook getekend
-                    // plus dat we dan de kortste route kunnen gaan berekenen nav de locatie van een object
-                    // maar ik kwam er niet uit, hij wilde niet tekenen nav een object
-                    // dus nu maar even zo...
-                    if (kaart.getMap(x, y).equals("g")) {
-                        g.drawImage(kaart.getGras(), x * IMGBREEDTE, y * IMGHOOGTE, null);
-                        Object gras = new Gras();
-                        mapObjects.add(gras);
-                    }
-                    if (kaart.getMap(x, y).equals("w")) {
-                        g.drawImage(kaart.getMuur(), x * IMGBREEDTE, y * IMGHOOGTE, null);
-                        Object muur = new Muur();
-                        mapObjects.add(muur);
-                    }
-                    if (kaart.getMap(x, y).equals("b")) {
-                        g.drawImage(kaart.getBazooka(), x * IMGBREEDTE, y * IMGHOOGTE, null);
-                        Object bazooka = new Bazooka();
-                        mapObjects.add(bazooka);
-                    }
-                    if (kaart.getMap(x, y).equals("f")) {
-                        
-                        Vriend vriend = new Vriend();
-                        g.drawImage(vriend.getImage(), x * IMGBREEDTE, y * IMGHOOGTE, null);
-                        mapObjects.add(vriend);
-                    }        
-                    if (kaart.getMap(x, y).equals("s")) {
-                        g.drawImage(kaart.getStart(), x * IMGBREEDTE, y * IMGHOOGTE, null);
-                    }
+//        int aantal = kaart.getMapgrootte();
+//        for (int i = 0; i < aantal; i++) {
+        
+          for (int x = 0; x < 21; x++) {
+            for (int y = 0; y < 21; y++) {
+       // for (int i = 0; i < 21*21; i++) {
+                Veldbezetting veld = kaart.getMap(x, y);
+                g.drawImage(veld.getImage(), x * IMGBREEDTE, y * IMGHOOGTE, null);
+//                    if (veld instanceof Gras) {
+//                        
+//                    }
+//                    if (mapObjects.get(i).equals("muur")) {
+//                        g.drawImage(kaart.getMuur(), x * IMGBREEDTE, y * IMGHOOGTE, null);
+//                    }
+//                    if (mapObjects.contains(bazooka)) {
+//                        g.drawImage(bazooka.getImage(), x * IMGBREEDTE, y * IMGHOOGTE, null);
+//                    }
+//                    if (mapObjects.contains(vriend)) {
+//                        g.drawImage(vriend.getImage(), x * IMGBREEDTE, y * IMGHOOGTE, null);
+//                    }        
+//                    if (mapObjects.get(i).equals("start")) {
+//                        g.drawImage(kaart.getStart(), x * IMGBREEDTE, y * IMGHOOGTE, null);
+//                    }
                 }
+                g.drawImage(held.getImage(), held.getVeldX() * 32, held.getVeldY() * 32, null);
+                //repaint();
             }
-        }    
-        g.drawImage(held.getImage(), held.getVeldX() * 32, held.getVeldY() * 32, null);
-        //repaint();
+//        }    
     }
 
     public class PijltjesListener extends KeyAdapter {
