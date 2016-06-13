@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -27,6 +29,8 @@ class Doolhof {
     JPanel dummy4;
     JPanel centerdummy;
     JButton reset;
+    JButton schietKnop;
+
     
 /// BUTTON IN EEN APARTE PANEL > PANEL IN CENTER VAN BORDERLAYOUT BUTTONPANEL 
 
@@ -51,10 +55,12 @@ class Doolhof {
         reset.setText("Reset");
         
         // schietknop toevoegen, maar als het goed is niet zichtbaar tot we een bazooka vinden
-        JButton schietKnop;
         schietKnop = new JButton();
+        schietKnop.setSize(buttonSizeHeight, buttonSizesWidth);
         schietKnop.setText("Schieten!");
         schietKnop.setVisible(false);
+        ActionListener listener = new ClickListener();
+        schietKnop.addActionListener(listener);
         
         // actie toevoegen aan de resetbutton!
         // zetten we de actionlistener inhoudelijke code hier? of elders? (onder bord?)
@@ -79,6 +85,7 @@ class Doolhof {
         centerdummy.setPreferredSize(new Dimension(50, 350));
         buttonpanel.add(centerdummy, BorderLayout.CENTER);
         centerdummy.add(reset, BorderLayout.CENTER);
+        centerdummy.add(schietKnop, BorderLayout.EAST);
 
         // alle panels toevoegen aan het uiteindelijke gamepanel
         gamepanel.add(new Bord());
@@ -88,5 +95,15 @@ class Doolhof {
         // als laatste voegen we de gamepanel toe aan de gameframe en zorgen we dat het zichtbaar is
         spelframe.add(gamepanel);
         spelframe.setVisible(true);
+        
+        
     }
+    
+    public class ClickListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent event) {
+            System.out.println("I was clicked.");
+        }
+    }
+    
 }

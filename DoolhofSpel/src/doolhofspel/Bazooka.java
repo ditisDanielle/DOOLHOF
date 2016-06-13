@@ -1,5 +1,7 @@
 package doolhofspel;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 
 /**
@@ -21,7 +23,9 @@ public class Bazooka extends Tempbezetting {
         // zodra op dit knopje gedrukt wordt dan wordt er geschoten
         // je zou dit ook met een keylistener kunnen doen, die pas actief wordt als de bazooka is gevonden
         // knopje op doolhof gezet, niet actief, en hier maken we m zichtbaar (als dit werkt)
+        // de knop werkt, nu nog activeren vanuit hier...
         // schietKnop.setVisible(true);
+        
     }
     
     public void muurVernietigen(){
@@ -33,5 +37,16 @@ public class Bazooka extends Tempbezetting {
 //            replace held.getVeld.... instanceof Muur by instanceof Gras 
 //            geen idee of dat gaat werken, lol
 //        }
+        // onderstaande regel naar Doolhof verhuisd
+//        ActionListener listener = new ClickListener();
     }
+    
+//    public class ClickListener implements ActionListener {
+//        @Override
+//        public void actionPerformed(ActionEvent event) {
+//            System.out.println("I was clicked.");
+//        }
+//    }
+    
 }
+
