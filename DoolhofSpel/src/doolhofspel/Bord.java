@@ -13,11 +13,13 @@ import javax.swing.Timer;
  *
  * @author Agnita & Danielle (Groep 7)
  */
+
 public class Bord extends JPanel implements ActionListener {
 
     private Timer timer;
     private Plattegrond kaart;
     private Held held;
+    // zie commentaar over bazooka bij de constructor
     private Bazooka bazooka;
     private Vriend vriend;
     private final int IMGBREEDTE = 32; // breedte afbeelding in pixels
@@ -31,6 +33,8 @@ public class Bord extends JPanel implements ActionListener {
         timer.start();
         kaart = new Plattegrond();
         held = new Held();
+        // Deze zou weg kunnen, maar dan krijg ik de method schieten in bazooka niet
+        // die zou dan onder speler moeten denk ik
         bazooka = new Bazooka();
         vriend = new Vriend();
         addKeyListener(new PijltjesListener());
@@ -43,44 +47,21 @@ public class Bord extends JPanel implements ActionListener {
 
     public void paint(Graphics g) {
         super.paint(g);
-//        int aantal = kaart.getMapgrootte();
-//        for (int i = 0; i < aantal; i++) {
-        
-          for (int x = 0; x < 21; x++) {
+        for (int x = 0; x < 21; x++) {
             for (int y = 0; y < 21; y++) {
-       // for (int i = 0; i < 21*21; i++) {
                 Veldbezetting veld = kaart.getMap(x, y);
                 g.drawImage(veld.getImage(), x * IMGBREEDTE, y * IMGHOOGTE, null);
-//                    if (veld instanceof Gras) {
-//                        
-//                    }
-//                    if (mapObjects.get(i).equals("muur")) {
-//                        g.drawImage(kaart.getMuur(), x * IMGBREEDTE, y * IMGHOOGTE, null);
-//                    }
-//                    if (mapObjects.contains(bazooka)) {
-//                        g.drawImage(bazooka.getImage(), x * IMGBREEDTE, y * IMGHOOGTE, null);
-//                    }
-//                    if (mapObjects.contains(vriend)) {
-//                        g.drawImage(vriend.getImage(), x * IMGBREEDTE, y * IMGHOOGTE, null);
-//                    }        
-//                    if (mapObjects.get(i).equals("start")) {
-//                        g.drawImage(kaart.getStart(), x * IMGBREEDTE, y * IMGHOOGTE, null);
-//                    }
-                }
-                g.drawImage(held.getImage(), held.getVeldX() * 32, held.getVeldY() * 32, null);
-                //repaint();
             }
-//        }    
+            g.drawImage(held.getImage(), held.getVeldX() * 32, held.getVeldY() * 32, null);
+            //repaint();
+        }  
     }
 
     public class PijltjesListener extends KeyAdapter {
-
         @Override
         public void keyTyped(KeyEvent e) {
             //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
-
-        // code keyPressed herschreven om deze korter te maken (no redundancy)
         @Override
         public void keyPressed(KeyEvent e) {
             // stap naar rechts of links
@@ -111,115 +92,28 @@ public class Bord extends JPanel implements ActionListener {
         }  
 
         public void lopen(int stapX, int stapY) {
-            // om objecten toe te voegen hoeven deze nu maar 1x hier toegevoegd te worden
-            // in plaats van bij elke stap een keer
-            // nu aangeven of er gelopen wordt naar aanleiding van wat we vinden
-            // en even aangeven wat we vinden, als er wat gevonden wordt
-            // en de equal moet op het object plaats vinden
-            if (kaart.getMap(held.getVeldX() + stapX, held.getVeldY() + stapY).equals("s")) {
+            // geen idee of deze al werkt, ik bedoel de speler dus, ff testen!
+            if (kaart.getMap(held.getVeldX() + stapX, held.getVeldY() + stapY) instanceof Speler) {
                 System.out.println("Niet lopen, je zit bij de start");
             }
             else {
-                if (kaart.getMap(held.getVeldX() + stapX, held.getVeldY() + stapY).equals("f")) {
+                if (kaart.getMap(held.getVeldX() + stapX, held.getVeldY() + stapY) instanceof Vriend) {
                     System.out.println("Vriend gevonden!!!");
                 }
-                if (kaart.getMap(held.getVeldX() + stapX, held.getVeldY() + stapY).equals("b")) {
+                if (kaart.getMap(held.getVeldX() + stapX, held.getVeldY() + stapY) instanceof Bazooka) {
                     System.out.println("Found bazooka!");
+                    bazooka.activeerSchietknop();
                 }
-                if (!kaart.getMap(held.getVeldX() + stapX, held.getVeldY() + stapY).equals("w")) {
+                if(!(kaart.getMap(held.getVeldX() + stapX, held.getVeldY() + stapY)instanceof Muur)) {
+                    System.out.println("we lopen");
                     held.lopen(stapX, stapY);
-                }    
+                }
             }
         }
         
-        // DIT IS HET ORIGINEEL van het lopen kan weg
-//        @Override
-//        public void keyPressed(KeyEvent e) {
-//            switch (e.getKeyCode()) {
-//                case KeyEvent.VK_RIGHT:
-//                    if (kaart.getMap(held.getVeldX() + 1, held.getVeldY()).equals("f")) {
-//                        System.out.println("Vriend gevonden!!!");
-//                        break;
-//                    }
-//                    if (kaart.getMap(held.getVeldX() + 1, held.getVeldY()).equals("s")) {
-//                        System.out.println("Niet lopen, je zit bij de start");
-//                        break;
-//                    }
-//                    if (kaart.getMap(held.getVeldX() + 1, held.getVeldY()).equals("b")) {
-//                        // method bazooka
-//                        System.out.println("Found bazooka!");
-//                    }
-//                    if (!kaart.getMap(held.getVeldX() + 1, held.getVeldY()).equals("w")) {
-//                        held.lopen(1, 0);
-//                        System.out.println("right...");
-//                    }
-//                    break;
-//
-//                case KeyEvent.VK_LEFT:
-//                    if (kaart.getMap(held.getVeldX() - 1, held.getVeldY()).equals("f")) {
-//                        System.out.println("Vriend gevonden!!!");
-//                        break;
-//                    }
-//                    // let op: toevoegen aan alle keyacties, startveld positie kan wijzigen!
-//                    if (kaart.getMap(held.getVeldX() - 1, held.getVeldY()).equals("s")) {
-//                        System.out.println("Niet lopen, je zit bij de start");
-//                        break;
-//                    }
-//                    if (kaart.getMap(held.getVeldX() - 1, held.getVeldY()).equals("b")) {
-//                        // method bazooka
-//                        System.out.println("Found bazooka!");
-//                    }
-//                    if (!kaart.getMap(held.getVeldX() - 1, held.getVeldY()).equals("w")) {
-//                        held.lopen(-1, 0);
-//                        System.out.println("left...");
-//
-//                    }
-//                    break;
-//
-//                case KeyEvent.VK_DOWN:
-//                    if (kaart.getMap(held.getVeldX(), held.getVeldY() + 1).equals("f")) {
-//                        System.out.println("Vriend gevonden!!!");
-//                        break;
-//                    }
-//                    if (kaart.getMap(held.getVeldX(), held.getVeldY() + 1).equals("s")) {
-//                        System.out.println("Niet lopen, je zit bij de start");
-//                        break;
-//                    }
-//                    if (kaart.getMap(held.getVeldX(), held.getVeldY() + 1).equals("b")) {
-//                        // method bazooka
-//                        System.out.println("Found bazooka!");
-//                    }
-//                    if (!kaart.getMap(held.getVeldX(), held.getVeldY() + 1).equals("w")) {
-//                        held.lopen(0, 1);
-//                        System.out.println("down...");
-//                    }
-//                    break;
-//
-//                case KeyEvent.VK_UP:
-//                    if (kaart.getMap(held.getVeldX(), held.getVeldY() - 1).equals("f")) {
-//                        System.out.println("Vriend gevonden!!!");
-//                        break;
-//                    }
-//                    if (kaart.getMap(held.getVeldX(), held.getVeldY() - 1).equals("s")) {
-//                        System.out.println("Niet lopen, je zit bij de start");
-//                        break;
-//                    }
-//                    if (kaart.getMap(held.getVeldX(), held.getVeldY() - 1).equals("b")) {
-//                        // method bazooka
-//                        System.out.println("Found bazooka!");
-//                    }
-//                    if (!kaart.getMap(held.getVeldX(), held.getVeldY() - 1).equals("w")) {
-//                        System.out.println("up...");
-//                        held.lopen(0, -1);
-//                    }
-//                    break;
-//            }
-//        }
-
         @Override
         public void keyReleased(KeyEvent e) {
             //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
-
     }
 }

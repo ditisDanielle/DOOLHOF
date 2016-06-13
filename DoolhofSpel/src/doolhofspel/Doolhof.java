@@ -27,6 +27,7 @@ class Doolhof {
     JPanel dummy4;
     JPanel centerdummy;
     JButton reset;
+    
 /// BUTTON IN EEN APARTE PANEL > PANEL IN CENTER VAN BORDERLAYOUT BUTTONPANEL 
 
     public Doolhof() {
@@ -48,8 +49,16 @@ class Doolhof {
         reset = new JButton();
         reset.setSize(buttonSizeHeight, buttonSizesWidth);
         reset.setText("Reset");
-
+        
+        // schietknop toevoegen, maar als het goed is niet zichtbaar tot we een bazooka vinden
+        JButton schietKnop;
+        schietKnop = new JButton();
+        schietKnop.setText("Schieten!");
+        schietKnop.setVisible(false);
+        
         // actie toevoegen aan de resetbutton!
+        // zetten we de actionlistener inhoudelijke code hier? of elders? (onder bord?)
+        // niet te moeilijk doen, poppetje gewoon weer aan het begin zetten, anders "gewoon" opnieuw inlezen de boel
         reset.addActionListener(null);
 
         // dummy panels toevoegen ivm de layout

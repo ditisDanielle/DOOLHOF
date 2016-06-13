@@ -10,11 +10,10 @@ import java.awt.Image;
 public abstract class Veldbezetting {
     private Image afbeelding;
     private int veldX, veldY;
-
     
     public Veldbezetting(){
     
-}
+    }
     
     public void setImage(Image afbeelding){
       this.afbeelding = afbeelding;
