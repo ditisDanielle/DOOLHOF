@@ -15,7 +15,6 @@ import javax.swing.Timer;
  */
 
 public class Bord extends JPanel implements ActionListener {
-
     private Timer timer;
     private Plattegrond kaart;
     private Held held;
@@ -30,6 +29,7 @@ public class Bord extends JPanel implements ActionListener {
     private int stapY;
     Doolhof doolhof;
 
+    
     public Bord(Doolhof doolhof) {
         timer = new Timer(25, this);
         timer.start();
@@ -113,12 +113,10 @@ public class Bord extends JPanel implements ActionListener {
         
         private void telStap() {
             stappenteller++;
-
             try {
                 doolhof.setTeller(stappenteller);
             } catch (Exception e) {
                 System.out.println(e);
-
             }
         }
         
@@ -130,4 +128,5 @@ public class Bord extends JPanel implements ActionListener {
             doolhof.switchVisibilitySchietknop(false);
         }
     }
+
 }

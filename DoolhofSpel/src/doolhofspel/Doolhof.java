@@ -32,7 +32,6 @@ class Doolhof implements ActionListener{
     JButton schietKnop;
     JButton teller;
     JButton tellerlabel;
-    
 
     
     public Doolhof() {
@@ -60,14 +59,14 @@ class Doolhof implements ActionListener{
         reset.setText("Start spel opnieuw");
         reset.addActionListener(this);
         reset.addActionListener(new ResetListener());
-        // niet te moeilijk doen, poppetje gewoon weer aan het begin zetten, anders "gewoon" opnieuw inlezen de boel
-        // DANIELLE: opnieuw beginnen kan niet. dus we gaan alles terugzetten
-        
+        reset.setFocusable(false);
+
         // Schietknop , niet zichtbaar tot we een bazooka vinden
         schietKnop = new JButton();
         schietKnop.setSize(buttonSizeHeight, buttonSizesWidth);
         schietKnop.setText("Schieten!");
         schietKnop.setVisible(false); 
+        schietKnop.setFocusable(false);
         schietKnop.addActionListener(this);
         schietKnop.addActionListener (new SchietListener());
                 
@@ -78,8 +77,6 @@ class Doolhof implements ActionListener{
         //  Teller
         teller = new JButton();
         teller.setText("0");
-        
-       
 
         // dummy panels toevoegen aan buttonpanel
         dummy1 = new JPanel();
@@ -103,9 +100,6 @@ class Doolhof implements ActionListener{
         centerdummy.add(teller, BorderLayout.CENTER);
         
         buttonpanel.add(centerdummy, BorderLayout.CENTER);
-        
-        
-
 
         // alle panels toevoegen aan het uiteindelijke gamepanel
         gamepanel.add(new Bord(this));
@@ -115,22 +109,20 @@ class Doolhof implements ActionListener{
         // als laatste voegen we de gamepanel toe aan de gameframe en zorgen we dat het zichtbaar is
         spelframe.add(gamepanel);
         spelframe.setVisible(true);
-        
-        
     }
     
-   public void setTeller(int aantal){
+    public void setTeller(int aantal){
         String telling  = Integer.toString(aantal);
         System.out.println(telling);
         teller.setText(telling);
-   }
+    }
    
-   public void switchVisibilitySchietknop(boolean b){
-       if(b==true){
-       schietKnop.setVisible(true);
-       }else if (b == false){
-        schietKnop.setVisible(true);
-           
+    public void switchVisibilitySchietknop(boolean b){
+        if(b==true){
+            schietKnop.setVisible(true);
+        }
+        else if (b == false){
+            schietKnop.setVisible(true);
        }
    }
 
@@ -138,16 +130,11 @@ class Doolhof implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-   
-    
-
 
     private  class ResetListener implements ActionListener{
-
         public ResetListener() {
 
         }
-
         @Override
         public void actionPerformed(ActionEvent e) {
                         System.out.println("resetlistener geactiveerd");
@@ -155,18 +142,13 @@ class Doolhof implements ActionListener{
     }
     
     private static class SchietListener implements ActionListener{
-
         public SchietListener() {
 
         }
-
         @Override
         public void actionPerformed(ActionEvent e) {
                         System.out.println("schietknoplistener geactiveerd");
         }
-
     }
 
-    
-    
 }
