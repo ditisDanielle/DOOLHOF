@@ -87,13 +87,18 @@ public class Plattegrond {
                     Vriend vriend = new Vriend();
                     mapObjects.add(vriend);
                 }        
-                 if (veld.equals("s")) {
+                // hier doen we niets mee, wellicht later een monster van maken
+                if (veld.equals("s")) {
                     Vriend vriend = new Vriend();
                     mapObjects.add(vriend);
                 }
             }
         }
     }      
+    
+    public ArrayList getMapObjects() {
+        return mapObjects;
+    }
     
     public void closeFile() {
         file.close();

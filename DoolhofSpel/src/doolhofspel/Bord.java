@@ -24,7 +24,7 @@ public class Bord extends JPanel implements ActionListener {
     private Vriend vriend;
     private final int IMGBREEDTE = 32; // breedte afbeelding in pixels
     private final int IMGHOOGTE = 32; // breedte afbeelding in pixels
-    private ArrayList<Object> mapObjects = new ArrayList<>();
+//    public ArrayList<Object> mapObjects = new ArrayList<>();
     private int stapX;
     private int stapY;
     Doolhof doolhof;
@@ -41,7 +41,7 @@ public class Bord extends JPanel implements ActionListener {
         vriend = new Vriend();
         addKeyListener(new PijltjesListener());
         setFocusable(true);
-                this.doolhof = doolhof;
+        this.doolhof = doolhof;
     }
 
     @Override
@@ -121,7 +121,23 @@ public class Bord extends JPanel implements ActionListener {
         }
         
         public void activeerSchietknop() {
+            ArrayList findBazooka = kaart.getMapObjects();
             doolhof.switchVisibilitySchietknop(true);
+            for (int i = 0; i < findBazooka.size(); i++) {
+                String value = findBazooka.get(i).toString();
+                if (value.contains("Bazooka")) {
+                    System.out.println("Found bazooka in de ArrayList");
+                    findBazooka.remove(i);
+                    Gras gras = new Gras();
+                    findBazooka.add(i, gras);
+                }
+            }
+            for (int i = 0; i < findBazooka.size(); i++) {
+                String value = findBazooka.get(i).toString();
+                if (value.contains("Bazooka")) {
+                    System.out.println("Found 2x");
+                }
+            }
         }
 
         public void deactiveerSchietnkop() {

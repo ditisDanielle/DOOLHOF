@@ -131,13 +131,14 @@ class Doolhof implements ActionListener{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    // de resetlistener, deze moet het level gaan resetten
     private  class ResetListener implements ActionListener{
         public ResetListener() {
 
         }
         @Override
         public void actionPerformed(ActionEvent e) {
-                        System.out.println("resetlistener geactiveerd");
+            System.out.println("resetlistener geactiveerd");
         }
     }
     
@@ -147,7 +148,7 @@ class Doolhof implements ActionListener{
         }
         @Override
         public void actionPerformed(ActionEvent e) {
-                        System.out.println("schietknoplistener geactiveerd");
+            System.out.println("schietknoplistener geactiveerd");
         }
     }
 
