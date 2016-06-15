@@ -15,6 +15,10 @@ public class Held extends Veldbezetting{
         super.setImage(img.getImage());
         super.setPositie(1,1);
     }
+    
+    public void resetHeld(){
+        super.setPositie(1,1);
+    }
         
      public int getVeldX(){
         return super.getX(1);
@@ -31,6 +35,10 @@ public class Held extends Veldbezetting{
     }
     
     public void schieten(){
+        
+        // deactiveer schietknop aanroepen vanuit hier?
+        // muurwordgras(); methode in bord, maar hoe roep je die aan, held heeft geen weet van bord (geen attribuut)
+        // 
         
     }
     

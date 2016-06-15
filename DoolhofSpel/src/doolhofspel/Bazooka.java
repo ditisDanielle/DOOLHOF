@@ -16,17 +16,10 @@ public class Bazooka extends Tempbezetting {
         ImageIcon img = new ImageIcon("Pictures//bazooka.png");
         super.setImage(img.getImage());
         super.setPositie(1,1);
-    }
-    
-    public void activeerSchietknop() {
-        // maak hier een knopje zodat je kunt schieten
-        // zodra op dit knopje gedrukt wordt dan wordt er geschoten
-        // je zou dit ook met een keylistener kunnen doen, die pas actief wordt als de bazooka is gevonden
-        // knopje op doolhof gezet, niet actief, en hier maken we m zichtbaar (als dit werkt)
-        // de knop werkt, nu nog activeren vanuit hier...
-        // schietKnop.setVisible(true);
         
     }
+    
+    
     
     public void muurVernietigen(){
         // hier de daadwerkelijke code om het muurobject te vervangen door een grasobject

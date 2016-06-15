@@ -19,6 +19,7 @@ public class Bord extends JPanel implements ActionListener {
     private Timer timer;
     private Plattegrond kaart;
     private Held held;
+    private int stappenteller;
     // zie commentaar over bazooka bij de constructor
     private Bazooka bazooka;
     private Vriend vriend;
@@ -27,8 +28,9 @@ public class Bord extends JPanel implements ActionListener {
     private ArrayList<Object> mapObjects = new ArrayList<>();
     private int stapX;
     private int stapY;
+    Doolhof doolhof;
 
-    public Bord() {
+    public Bord(Doolhof doolhof) {
         timer = new Timer(25, this);
         timer.start();
         kaart = new Plattegrond();
@@ -39,8 +41,10 @@ public class Bord extends JPanel implements ActionListener {
         vriend = new Vriend();
         addKeyListener(new PijltjesListener());
         setFocusable(true);
+                this.doolhof = doolhof;
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
         repaint();
     }
@@ -53,15 +57,10 @@ public class Bord extends JPanel implements ActionListener {
                 g.drawImage(veld.getImage(), x * IMGBREEDTE, y * IMGHOOGTE, null);
             }
             g.drawImage(held.getImage(), held.getVeldX() * 32, held.getVeldY() * 32, null);
-            //repaint();
         }  
     }
 
     public class PijltjesListener extends KeyAdapter {
-        @Override
-        public void keyTyped(KeyEvent e) {
-            //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        }
         @Override
         public void keyPressed(KeyEvent e) {
             // stap naar rechts of links
@@ -87,13 +86,13 @@ public class Bord extends JPanel implements ActionListener {
                     break; 
             }
             // even een aparte method gemaakt, om het overzichtelijk te houden
-            lopen(stapX, stapY);
+            checkVeld(stapX, stapY);
+            telStap();
             repaint();
         }  
 
-        public void lopen(int stapX, int stapY) {
-            // geen idee of deze al werkt, ik bedoel de speler dus, ff testen!
-            if (kaart.getMap(held.getVeldX() + stapX, held.getVeldY() + stapY) instanceof Speler) {
+        public void checkVeld(int stapX, int stapY) {
+            if (kaart.getMap(held.getVeldX() + stapX, held.getVeldY() + stapY) instanceof Held){
                 System.out.println("Niet lopen, je zit bij de start");
             }
             else {
@@ -102,7 +101,8 @@ public class Bord extends JPanel implements ActionListener {
                 }
                 if (kaart.getMap(held.getVeldX() + stapX, held.getVeldY() + stapY) instanceof Bazooka) {
                     System.out.println("Found bazooka!");
-                    bazooka.activeerSchietknop();
+                    //held.pakBazooka();
+                    activeerSchietknop();
                 }
                 if(!(kaart.getMap(held.getVeldX() + stapX, held.getVeldY() + stapY)instanceof Muur)) {
                     System.out.println("we lopen");
@@ -111,9 +111,23 @@ public class Bord extends JPanel implements ActionListener {
             }
         }
         
-        @Override
-        public void keyReleased(KeyEvent e) {
-            //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        private void telStap() {
+            stappenteller++;
+
+            try {
+                doolhof.setTeller(stappenteller);
+            } catch (Exception e) {
+                System.out.println(e);
+
+            }
+        }
+        
+        public void activeerSchietknop() {
+            doolhof.switchVisibilitySchietknop(true);
+        }
+
+        public void deactiveerSchietnkop() {
+            doolhof.switchVisibilitySchietknop(false);
         }
     }
 }

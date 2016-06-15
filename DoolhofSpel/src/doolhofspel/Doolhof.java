@@ -15,7 +15,7 @@ import javax.swing.JPanel;
  * @author Agnita & Danielle (Groep 7)
  */
 
-class Doolhof {
+class Doolhof implements ActionListener{
 
     int buttonSizeHeight = 1; // later FINAL maken
     int buttonSizesWidth = 3;// later FINAL maken
@@ -30,10 +30,11 @@ class Doolhof {
     JPanel centerdummy;
     JButton reset;
     JButton schietKnop;
+    JButton teller;
+    JButton tellerlabel;
+    
 
     
-/// BUTTON IN EEN APARTE PANEL > PANEL IN CENTER VAN BORDERLAYOUT BUTTONPANEL 
-
     public Doolhof() {
         // maak een gameframe
         spelframe = new JFrame();
@@ -45,29 +46,42 @@ class Doolhof {
         spelframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // set layouts
+        // game panel bevat het bord
+        // gamepanel bevat oostpanel 
+        // oostpanel bevat buttonpanel
+        // buttonpanel bevat dummies 1-north,2-south,3-west en 4-west en een centerdummy
         gamepanel = new JPanel(new GridLayout(1, 2));
         buttonpanel = new JPanel(new BorderLayout());
         oostpanel = new JPanel(new BorderLayout());
 
-        //button
+        //Resetbutton
         reset = new JButton();
         reset.setSize(buttonSizeHeight, buttonSizesWidth);
-        reset.setText("Reset");
+        reset.setText("Start spel opnieuw");
+        reset.addActionListener(this);
+        reset.addActionListener(new ResetListener());
+        // niet te moeilijk doen, poppetje gewoon weer aan het begin zetten, anders "gewoon" opnieuw inlezen de boel
+        // DANIELLE: opnieuw beginnen kan niet. dus we gaan alles terugzetten
         
-        // schietknop toevoegen, maar als het goed is niet zichtbaar tot we een bazooka vinden
+        // Schietknop , niet zichtbaar tot we een bazooka vinden
         schietKnop = new JButton();
         schietKnop.setSize(buttonSizeHeight, buttonSizesWidth);
         schietKnop.setText("Schieten!");
-        schietKnop.setVisible(false);
-        ActionListener listener = new ClickListener();
-        schietKnop.addActionListener(listener);
+        schietKnop.setVisible(false); 
+        schietKnop.addActionListener(this);
+        schietKnop.addActionListener (new SchietListener());
+                
+        // Tellerlabel
+        tellerlabel =new JButton();
+        tellerlabel.setText("Aantal gezette stappen:");
         
-        // actie toevoegen aan de resetbutton!
-        // zetten we de actionlistener inhoudelijke code hier? of elders? (onder bord?)
-        // niet te moeilijk doen, poppetje gewoon weer aan het begin zetten, anders "gewoon" opnieuw inlezen de boel
-        reset.addActionListener(null);
+        //  Teller
+        teller = new JButton();
+        teller.setText("0");
+        
+       
 
-        // dummy panels toevoegen ivm de layout
+        // dummy panels toevoegen aan buttonpanel
         dummy1 = new JPanel();
         dummy1.setPreferredSize(new Dimension(50, 300));
         buttonpanel.add(dummy1, BorderLayout.NORTH);
@@ -80,15 +94,21 @@ class Doolhof {
         dummy4 = new JPanel();
         dummy4.setPreferredSize(new Dimension(50, 350));
         buttonpanel.add(dummy4, BorderLayout.WEST);
-
-        centerdummy = new JPanel();
+        centerdummy = new JPanel(new BorderLayout());
         centerdummy.setPreferredSize(new Dimension(50, 350));
+        //centerpanel in buttonpanel inrichten
+        centerdummy.add(reset, BorderLayout.NORTH);
+        centerdummy.add(schietKnop, BorderLayout.SOUTH);
+        centerdummy.add(tellerlabel, BorderLayout.WEST);
+        centerdummy.add(teller, BorderLayout.CENTER);
+        
         buttonpanel.add(centerdummy, BorderLayout.CENTER);
-        centerdummy.add(reset, BorderLayout.CENTER);
-        centerdummy.add(schietKnop, BorderLayout.EAST);
+        
+        
+
 
         // alle panels toevoegen aan het uiteindelijke gamepanel
-        gamepanel.add(new Bord());
+        gamepanel.add(new Bord(this));
         gamepanel.add(oostpanel);
         oostpanel.add(buttonpanel, BorderLayout.CENTER);
 
@@ -99,11 +119,54 @@ class Doolhof {
         
     }
     
-    public class ClickListener implements ActionListener {
+   public void setTeller(int aantal){
+        String telling  = Integer.toString(aantal);
+        System.out.println(telling);
+        teller.setText(telling);
+   }
+   
+   public void switchVisibilitySchietknop(boolean b){
+       if(b==true){
+       schietKnop.setVisible(true);
+       }else if (b == false){
+        schietKnop.setVisible(true);
+           
+       }
+   }
+
+    @Override // deze komt mee vanwege implements ActionListener
+    public void actionPerformed(ActionEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+   
+    
+
+
+    private  class ResetListener implements ActionListener{
+
+        public ResetListener() {
+
+        }
+
         @Override
-        public void actionPerformed(ActionEvent event) {
-            System.out.println("I was clicked.");
+        public void actionPerformed(ActionEvent e) {
+                        System.out.println("resetlistener geactiveerd");
         }
     }
+    
+    private static class SchietListener implements ActionListener{
+
+        public SchietListener() {
+
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+                        System.out.println("schietknoplistener geactiveerd");
+        }
+
+    }
+
+    
     
 }
