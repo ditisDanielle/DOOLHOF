@@ -128,7 +128,8 @@ class Doolhof implements ActionListener{
 
     @Override // deze komt mee vanwege implements ActionListener
     public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return;
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     // de resetlistener, deze moet het level gaan resetten
