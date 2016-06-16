@@ -103,6 +103,7 @@ public class Bord extends JPanel implements ActionListener {
                     System.out.println("Found bazooka!");
                     //held.pakBazooka();
                     activeerSchietknop();
+                    //bazookaNaarGras(held.getVeldX() + stapX, held.getVeldY() + stapY);
                 }
                 if(!(kaart.getMap(held.getVeldX() + stapX, held.getVeldY() + stapY)instanceof Muur)) {
                     System.out.println("we lopen");
@@ -139,6 +140,16 @@ public class Bord extends JPanel implements ActionListener {
                 }
             }
         }
+        
+//        public void bazookaNaarGras( int x, int y){
+//            
+//            Gras gras = new Gras();
+//            bazooka.setImage(gras.getImage());
+//            bazooka.setPositie(x, y);
+//            repaint();
+//            
+//            
+//        }
 
         public void deactiveerSchietnkop() {
             doolhof.switchVisibilitySchietknop(false);
