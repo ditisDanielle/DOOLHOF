@@ -7,7 +7,6 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.JPanel;
-import javax.swing.Timer;
 
 /**
  *
@@ -15,7 +14,6 @@ import javax.swing.Timer;
  */
 
 public class Bord extends JPanel implements ActionListener {
-    private Timer timer;
     private Plattegrond kaart;
     private Held held;
     private int stappenteller;
@@ -27,11 +25,8 @@ public class Bord extends JPanel implements ActionListener {
     private int stapX;
     private int stapY;
     Doolhof doolhof;
-
     
     public Bord(Doolhof doolhof) {
-        timer = new Timer(25, this);
-        timer.start();
         kaart = new Plattegrond();
         held = new Held();
         // Deze zou weg kunnen, maar dan krijg ik de method schieten in held.bazookaPakken niet aan de praat
