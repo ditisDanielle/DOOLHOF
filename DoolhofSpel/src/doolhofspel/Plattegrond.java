@@ -14,7 +14,7 @@ import javax.swing.ImageIcon;
 public class Plattegrond {
     private Scanner file;
     private final int MAPGROOTTE = 21;
-    private Image start;
+    private final Image start;
     public ArrayList<Veldbezetting> mapObjects = new ArrayList<>();
     
     public Plattegrond() {
@@ -58,6 +58,7 @@ public class Plattegrond {
         int index = x * (MAPGROOTTE) + y;
         return mapObjects.get(index);
     }
+    
     public void openFile() {
         try {
             file = new Scanner(new File("kaart.txt"));
@@ -66,6 +67,7 @@ public class Plattegrond {
             System.out.println("Error loading map!");
         }
     }
+    
     public void readFile() {
         for (int z = 0; z < MAPGROOTTE; z++) {
             String line = file.next();

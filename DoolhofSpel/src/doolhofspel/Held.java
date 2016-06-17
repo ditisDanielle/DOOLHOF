@@ -1,6 +1,5 @@
 package doolhofspel;
 
-import java.awt.Image;
 import javax.swing.ImageIcon;
 
 /**
@@ -35,11 +34,8 @@ public class Held extends Veldbezetting{
     }
     
     public void schieten(){
-        
-        // deactiveer schietknop aanroepen vanuit hier?
         // muurwordgras(); methode in bord, maar hoe roep je die aan, held heeft geen weet van bord (geen attribuut)
         // 
-        
     }
     
     public void bazookaPakken(){

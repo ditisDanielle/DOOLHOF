@@ -8,8 +8,6 @@ import java.awt.Image;
  */
 
 public abstract class Tempbezetting extends Veldbezetting{
-   
-    
     public Tempbezetting() {
     
     }

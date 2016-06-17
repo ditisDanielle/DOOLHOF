@@ -1,6 +1,5 @@
 package doolhofspel;
 
-import java.awt.Image;
 import javax.swing.ImageIcon;
 
 /**
@@ -9,15 +8,12 @@ import javax.swing.ImageIcon;
  */
 
 public class Vriend extends Veldbezetting {
-        // waarden 1 nog vervangen door variabelenaam
-    
+    // waarden 1 nog vervangen door variabelenaam
     public Vriend(){
         ImageIcon img = new ImageIcon("Pictures//vriend.png");
         super.setImage(img.getImage());
         super.setPositie(1,1);
     }
-    
-
 
 }
 

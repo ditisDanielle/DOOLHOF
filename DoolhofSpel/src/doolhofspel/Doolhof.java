@@ -38,7 +38,6 @@ class Doolhof implements ActionListener{
         // maak een gameframe
         spelframe = new JFrame();
         spelframe.setTitle("Zoek je vriend!");
-        //spelframe.setSize(1000, 1000);
         	
         spelframe.setExtendedState(Frame.MAXIMIZED_BOTH);
         spelframe.setLocationRelativeTo(null);
@@ -129,7 +128,6 @@ class Doolhof implements ActionListener{
     @Override // deze komt mee vanwege implements ActionListener
     public void actionPerformed(ActionEvent e) {
         return;
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     // de resetlistener, deze moet het level gaan resetten
@@ -150,6 +148,7 @@ class Doolhof implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("schietknoplistener geactiveerd");
+            
         }
     }
 
