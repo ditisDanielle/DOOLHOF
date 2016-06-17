@@ -138,6 +138,7 @@ class Doolhof implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("resetlistener geactiveerd");
+            //resetDoolhof();
         }
     }
     
@@ -148,6 +149,7 @@ class Doolhof implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("schietknoplistener geactiveerd");
+            //held.schieten();
             
         }
     }

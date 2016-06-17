@@ -22,11 +22,7 @@ public class Helper extends Tempbezetting{
     
     }
     
-    // haal afbeelding op uit Tempbezetting
-    public Image getHelper(Image afbeelding){
-        return afbeelding;
-    }
-    
+      
     // waarden 1 nog vervangen door variabelenaam
     public int getVeldX(){
         return super.getX(1);

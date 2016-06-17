@@ -8,13 +8,18 @@ import javax.swing.ImageIcon;
  */
 
 public class Held extends Veldbezetting{
+    
+    boolean bazookaJN;
      // waarden 1 nog vervangen door variabelenaam
     public Held(){
       ImageIcon img = new ImageIcon("Pictures//held.png");
         super.setImage(img.getImage());
         super.setPositie(1,1);
+        bazookaJN = false;
+        
     }
     
+    // deze lijkt overbodig, je kunt toch super.setPositie aanroepen?
     public void resetHeld(){
         super.setPositie(1,1);
     }
@@ -35,6 +40,8 @@ public class Held extends Veldbezetting{
     
     // deze  methode werkt nog niet
     public void schieten(){
+       // ook nog inbouwen: situatie met meerdere grasvelden te overbruggen
+        
 //        ArrayList schiet = kaart.getMapObjects();
 //        if (stapX, stapY) instanceof Muur)) {
 //            int muurPos = stapX, stapY;
@@ -46,5 +53,7 @@ public class Held extends Veldbezetting{
     
     public void bazookaPakken(){
         
+         bazookaJN = true;
+         // zie verder ook methode die onder Bord en daar dus niet hoort, maar die we niet aan de praat krijgen hier
     }
 }

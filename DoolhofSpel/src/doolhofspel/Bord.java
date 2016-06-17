@@ -20,8 +20,8 @@ public class Bord extends JPanel implements ActionListener {
     // zie commentaar over bazooka bij de constructor
     private Bazooka bazooka;
     private Vriend vriend;
-    private final int IMGBREEDTE = 32; // breedte afbeelding in pixels
-    private final int IMGHOOGTE = 32; // breedte afbeelding in pixels
+    private final int VELDBREEDTE = 32; // breedte afbeelding in pixels
+    private final int VELDHOOGTE = 32; // breedte afbeelding in pixels
     private int stapX;
     private int stapY;
     Doolhof doolhof;
@@ -49,7 +49,7 @@ public class Bord extends JPanel implements ActionListener {
         for (int x = 0; x < 21; x++) {
             for (int y = 0; y < 21; y++) {
                 Veldbezetting veld = kaart.getMap(x, y);
-                g.drawImage(veld.getImage(), x * IMGBREEDTE, y * IMGHOOGTE, null);
+                g.drawImage(veld.getImage(), x * VELDBREEDTE, y * VELDHOOGTE, null);
             }
             g.drawImage(held.getImage(), held.getVeldX() * 32, held.getVeldY() * 32, null);
         }  

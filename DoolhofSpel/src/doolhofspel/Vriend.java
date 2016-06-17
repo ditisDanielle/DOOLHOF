@@ -14,6 +14,10 @@ public class Vriend extends Veldbezetting {
         super.setImage(img.getImage());
         super.setPositie(1,1);
     }
+    
+    public void juichen(){
+        
+    }
 
 }
 

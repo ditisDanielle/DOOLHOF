@@ -17,11 +17,7 @@ public class Valsspeler extends Tempbezetting {
         super.setPositie(1,1);
     }
 
-    // haal afbeelding op uit Tempbezetting
-    public Image getHelper(Image afbeelding){
-        return afbeelding;
-    }
-        
+          
     // waarden 1 nog vervangen door variabelenaam
     public int getVeldX(){
         return super.getX(1);

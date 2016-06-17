@@ -28,7 +28,7 @@ public abstract class Veldbezetting {
         this.veldY = y;
     }
     
-    public int getX(int x){
+        public int getX(int x){
         return x = this.veldX;
     }
     
