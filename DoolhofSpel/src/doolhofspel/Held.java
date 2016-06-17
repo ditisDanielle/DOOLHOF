@@ -33,9 +33,15 @@ public class Held extends Veldbezetting{
         super.setPositie(vx,vy);
     }
     
+    // deze  methode werkt nog niet
     public void schieten(){
-        // muurwordgras(); methode in bord, maar hoe roep je die aan, held heeft geen weet van bord (geen attribuut)
-        // 
+//        ArrayList schiet = kaart.getMapObjects();
+//        if (stapX, stapY) instanceof Muur)) {
+//            int muurPos = stapX, stapY;
+//            schiet.remove(muurPos);
+//            Gras gras = new Gras();
+//            schiet.add(muurPos, gras);
+//        }
     }
     
     public void bazookaPakken(){

@@ -34,7 +34,7 @@ public class Bord extends JPanel implements ActionListener {
         timer.start();
         kaart = new Plattegrond();
         held = new Held();
-        // Deze zou weg kunnen, maar dan krijg ik de method schieten in bazooka niet aan de praat
+        // Deze zou weg kunnen, maar dan krijg ik de method schieten in held.bazookaPakken niet aan de praat
         // die zou onder speler moeten
         bazooka = new Bazooka();
         vriend = new Vriend();
@@ -101,8 +101,9 @@ public class Bord extends JPanel implements ActionListener {
                 }
                 if (kaart.getMap(held.getVeldX() + stapX, held.getVeldY() + stapY) instanceof Bazooka) {
                     System.out.println("Found bazooka!");
-                    //held.pakBazooka();
                     activeerSchietknop();
+                    //held.pakBazooka();
+                    bazookaPakken();
                 }
                 if(!(kaart.getMap(held.getVeldX() + stapX, held.getVeldY() + stapY)instanceof Muur)) {
                     System.out.println("we lopen");
@@ -121,13 +122,15 @@ public class Bord extends JPanel implements ActionListener {
         }
         
         public void activeerSchietknop() {
-            ArrayList findBazooka = kaart.getMapObjects();
             doolhof.switchVisibilitySchietknop(true);
-            // de code hieronder moet naar bazooka
+        }
+        
+        // de code hieronder moet naar held
+        public void bazookaPakken() {
+            ArrayList findBazooka = kaart.getMapObjects();
             for (int i = 0; i < findBazooka.size(); i++) {
                 String value = findBazooka.get(i).toString();
                 if (value.contains("Bazooka")) {
-                    System.out.println("Found bazooka in de ArrayList");
                     findBazooka.remove(i);
                     Gras gras = new Gras();
                     findBazooka.add(i, gras);
@@ -135,27 +138,10 @@ public class Bord extends JPanel implements ActionListener {
             }
         }
         
-        public void bazookaNaarGras( int x, int y){
-            Gras gras = new Gras();
-            bazooka.setImage(gras.getImage());
-            bazooka.setPositie(x, y);
-            repaint();
-        }
-
         public void deactiveerSchietnkop() {
             doolhof.switchVisibilitySchietknop(false);
         }
         
-        // deze code moet naar held en aangepast, want zo gaat ie natuurlijk niet werken
-//        public void bazookaSchiet(Held held, int stapX, int stapY) {
-//            ArrayList schiet = kaart.getMapObjects();
-//            if (stapX, stapY) instanceof Muur)) {
-//                int muurPos = stapX, stapY;
-//                schiet.remove(muurPos);
-//                Gras gras = new Gras();
-//                schiet.add(muurPos, gras);
-//            }
-//        }
     }
 
 }
