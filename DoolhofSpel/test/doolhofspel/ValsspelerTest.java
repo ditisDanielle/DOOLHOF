@@ -34,21 +34,7 @@ public class ValsspelerTest {
     public void tearDown() {
     }
 
-    /**
-     * Test of getHelper method, of class Valsspeler.
-     */
-    @Test
-    public void testGetHelper() {
-        System.out.println("getHelper");
-        Image afbeelding = null;
-        Valsspeler instance = new Valsspeler();
-        Image expResult = null;
-        Image result = instance.getHelper(afbeelding);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
+   
     /**
      * Test of getVeldX method, of class Valsspeler.
      */

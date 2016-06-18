@@ -21,5 +21,9 @@ public class Bazooka extends Tempbezetting {
 
     }
     
+    public String toString(){
+        return "test";
+    }
+    
 }
 

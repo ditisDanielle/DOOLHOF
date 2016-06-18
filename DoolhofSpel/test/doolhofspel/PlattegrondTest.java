@@ -50,70 +50,70 @@ public class PlattegrondTest {
     }
 
     /**
-     * Test of getGras method, of class Plattegrond.
+     * Test of makeGras method, of class Plattegrond.
      */
     @Test
     public void testGetGras() {
         System.out.println("getGras");
         Plattegrond instance = new Plattegrond();
         Image expResult = null;
-        Image result = instance.getGras();
+        Image result = instance.makeGras();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getMuur method, of class Plattegrond.
+     * Test of makeMuur method, of class Plattegrond.
      */
     @Test
     public void testGetMuur() {
         System.out.println("getMuur");
         Plattegrond instance = new Plattegrond();
         Image expResult = null;
-        Image result = instance.getMuur();
+        Image result = instance.makeMuur();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getBazooka method, of class Plattegrond.
+     * Test of makeBazooka method, of class Plattegrond.
      */
     @Test
     public void testGetBazooka() {
         System.out.println("getBazooka");
         Plattegrond instance = new Plattegrond();
         Image expResult = null;
-        Image result = instance.getBazooka();
+        Image result = instance.makeBazooka();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getVriend method, of class Plattegrond.
+     * Test of makeVriend method, of class Plattegrond.
      */
     @Test
     public void testGetVriend() {
         System.out.println("getVriend");
         Plattegrond instance = new Plattegrond();
         Image expResult = null;
-        Image result = instance.getVriend();
+        Image result = instance.makeVriend();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getStart method, of class Plattegrond.
+     * Test of makeStart method, of class Plattegrond.
      */
     @Test
     public void testGetStart() {
         System.out.println("getStart");
         Plattegrond instance = new Plattegrond();
         Image expResult = null;
-        Image result = instance.getStart();
+        Image result = instance.makeStart();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");

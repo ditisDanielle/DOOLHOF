@@ -30,30 +30,31 @@ public class Plattegrond {
         return this.MAPGROOTTE;
     }
     
-    public Image getGras() {
+    public Image makeGras() {
         Gras gras = new Gras();
         return gras.getImage();
     }
     
-    public Image getMuur() {
+    public Image makeMuur() {
         Muur muur = new Muur();
         return muur.getImage();
     }
     
-    public Image getBazooka() {
+    public Image makeBazooka() {
         Bazooka bazooka = new Bazooka();
         return bazooka.getImage();
     }
     
-    public Image getVriend() {
+    public Image makeVriend() {
         Vriend vriend = new Vriend();
         return vriend.getImage();
     }
     
-    public Image getStart() {
+    public Image makeStart() {
         return start;
     }
     
+    //inlezen veldbezetting
     public Veldbezetting getMap(int x, int y) {
         int index = x * (MAPGROOTTE) + y;
         return mapObjects.get(index);
@@ -98,9 +99,12 @@ public class Plattegrond {
         }
     }      
     
-    public ArrayList getMapObjects() {
+     public ArrayList getMapObjects() {
         return mapObjects;
     }
+     
+     
+       
     
     public void closeFile() {
         file.close();

@@ -1,6 +1,7 @@
 package doolhofspel;
 
 import java.awt.Image;
+import java.util.ArrayList;
 
 /**
  *
@@ -37,8 +38,22 @@ public abstract class Tempbezetting extends Veldbezetting{
         return y = super.getY(y);
     }
     
-    public void verdwijnen(){
-        
-    }
-    
+    // deze methode moet coÖrdinaten meekrijgen van de positie van het object
+//    public void verdwijnen(int veldX,int veldY) {
+//        String pos = Integer.toString(veldX)+ Integer.toString(veldY);
+//        int index = Integer.parseInt(pos);
+//        
+//        
+//        
+//        
+//        ArrayList findBazooka = kaart.getMapObjects();
+//            for (int i = 0; i < findBazooka.size(); i++) {
+//                String value = findBazooka.get(i).toString();
+//                if (value.contains("Bazooka")) {
+//                    findBazooka.remove(i);
+//                    Gras gras = new Gras();
+//                    findBazooka.add(i, gras);
+//                }
+//            }
+//    
 }
