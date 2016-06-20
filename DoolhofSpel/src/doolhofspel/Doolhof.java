@@ -138,6 +138,8 @@ class Doolhof implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("resetlistener geactiveerd");
+            Doolhof doolhof = new Doolhof();
+            gamepanel.add(new Bord(doolhof));
             //resetDoolhof();
         }
     }
