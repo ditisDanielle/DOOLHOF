@@ -80,7 +80,7 @@ public class Bord extends JPanel implements ActionListener {
                     stapY = -1;
                     break; 
             }
-            // even een aparte method gemaakt, om het overzichtelijk te houden
+            // een aparte method gemaakt, om het overzichtelijk te houden
             checkVeld(stapX, stapY);
             telStap();
             repaint();
@@ -118,9 +118,7 @@ public class Bord extends JPanel implements ActionListener {
             }
         }
         
-        
         public void changeImage(int X, int Y){
-            
             ArrayList copykaart = kaart.getMapObjects();
             System.out.println(X);
             System.out.println(Y);
@@ -135,9 +133,6 @@ public class Bord extends JPanel implements ActionListener {
         public void activeerSchietknop() {
             doolhof.switchVisibilitySchietknop(true);
         }
-        
-        
-        
         
         public void deactiveerSchietnkop() {
             doolhof.switchVisibilitySchietknop(false);

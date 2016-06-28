@@ -14,16 +14,15 @@ public class Bazooka extends Tempbezetting {
         ImageIcon img = new ImageIcon("Pictures//bazooka.png");
         super.setImage(img.getImage());
         super.setPositie(1,1);
-        
     }
 
-    public void muurVernietigen(){
-
-    }
+//    public void muurVernietigen(){
+//
+//    }
     
-    public String toString(){
-        return "test";
-    }
+//    public String toString(){
+//        return "test";
+//    }
     
 }
 

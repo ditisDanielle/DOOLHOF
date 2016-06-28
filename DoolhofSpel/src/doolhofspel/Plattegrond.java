@@ -26,34 +26,36 @@ public class Plattegrond {
         closeFile();
     }
     
-    public int getMapgrootte(){
-        return this.MAPGROOTTE;
-    }
+    // overbodige code
+//    public int getMapgrootte(){
+//        return this.MAPGROOTTE;
+//    }
     
-    public Image makeGras() {
-        Gras gras = new Gras();
-        return gras.getImage();
-    }
-    
-    public Image makeMuur() {
-        Muur muur = new Muur();
-        return muur.getImage();
-    }
-    
-    public Image makeBazooka() {
-        Bazooka bazooka = new Bazooka();
-        return bazooka.getImage();
-    }
-    
-    public Image makeVriend() {
-        Vriend vriend = new Vriend();
-        return vriend.getImage();
-    }
-    
-    public Image makeStart() {
-        return start;
-    }
-    
+    // dit is overbodige code, kan weg
+//    public Image makeGras() {
+//        Gras gras = new Gras();
+//        return gras.getImage();
+//    }
+//    
+//    public Image makeMuur() {
+//        Muur muur = new Muur();
+//        return muur.getImage();
+//    }
+//    
+//    public Image makeBazooka() {
+//        Bazooka bazooka = new Bazooka();
+//        return bazooka.getImage();
+//    }
+//    
+//    public Image makeVriend() {
+//        Vriend vriend = new Vriend();
+//        return vriend.getImage();
+//    }
+//    
+//    public Image makeStart() {
+//        return start;
+//    }
+//    
     //inlezen veldbezetting
     public Veldbezetting getMap(int x, int y) {
         int index = x * (MAPGROOTTE) + y;
@@ -99,7 +101,7 @@ public class Plattegrond {
         }
     }      
     
-     public ArrayList getMapObjects() {
+    public ArrayList getMapObjects() {
         return mapObjects;
     }
      

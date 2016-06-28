@@ -151,8 +151,10 @@ class Doolhof implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("schietknoplistener geactiveerd");
-            //held.schieten();
-            
+            Held held = new Held();
+            int targetPosX = held.getVeldX();
+            int targetPosY = held.getVeldY();
+            held.schieten(targetPosX, targetPosY);
         }
     }
 
