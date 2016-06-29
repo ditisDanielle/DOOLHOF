@@ -12,8 +12,8 @@ import javax.swing.JPanel;
  *
  * @author Agnita & Danielle (Groep 7)
  */
-
 public class Bord extends JPanel implements ActionListener {
+
     private Plattegrond kaart;
     private Held held;
     private int stappenteller;
@@ -25,7 +25,7 @@ public class Bord extends JPanel implements ActionListener {
     private int stapX;
     private int stapY;
     Doolhof doolhof;
-    
+
     public Bord(Doolhof doolhof) {
         kaart = new Plattegrond();
         held = new Held();
@@ -36,6 +36,7 @@ public class Bord extends JPanel implements ActionListener {
         addKeyListener(new PijltjesListener());
         setFocusable(true);
         this.doolhof = doolhof;
+        //printPosities(); // print alle veldbezettingen met hun indexnr en x en y
     }
 
     @Override
@@ -52,10 +53,11 @@ public class Bord extends JPanel implements ActionListener {
                 g.drawImage(veld.getImage(), x * VELDBREEDTE, y * VELDHOOGTE, null);
             }
             g.drawImage(held.getImage(), held.getVeldX() * 32, held.getVeldY() * 32, null);
-        }  
+        }
     }
 
     public class PijltjesListener extends KeyAdapter {
+
         @Override
         public void keyPressed(KeyEvent e) {
             // stap naar rechts of links
@@ -66,78 +68,121 @@ public class Bord extends JPanel implements ActionListener {
                 case KeyEvent.VK_RIGHT:
                     stapX = 1;
                     stapY = 0;
+                    held.setRichting("right");
                     break;
                 case KeyEvent.VK_LEFT:
                     stapX = -1;
                     stapY = 0;
+                    held.setRichting("left");
                     break;
                 case KeyEvent.VK_DOWN:
                     stapX = 0;
                     stapY = 1;
+                    held.setRichting("down");
                     break;
                 case KeyEvent.VK_UP:
                     stapX = 0;
                     stapY = -1;
-                    break; 
+                    held.setRichting("up");
+                    break;
             }
             // een aparte method gemaakt, om het overzichtelijk te houden
             checkVeld(stapX, stapY);
-            telStap();
             repaint();
-        }  
+        }
 
         public void checkVeld(int stapX, int stapY) {
-            if (kaart.getMap(held.getVeldX() + stapX, held.getVeldY() + stapY) instanceof Held){
+
+            // Danielle: deze moet eigenlijk omgebouwd naar buitenmuur
+            if (kaart.getMap(held.getVeldX() + stapX, held.getVeldY() + stapY) instanceof Held) {
                 System.out.println("Niet lopen, je zit bij de start");
-            }
-            else {
+            } else {
                 if (kaart.getMap(held.getVeldX() + stapX, held.getVeldY() + stapY) instanceof Vriend) {
                     System.out.println("Vriend gevonden!!!");
                 }
                 if (kaart.getMap(held.getVeldX() + stapX, held.getVeldY() + stapY) instanceof Bazooka) {
-                    System.out.println("Found bazooka!");
+                    //System.out.println("Found bazooka!");
                     activeerSchietknop();
                     held.bazookaPakken();
                     int bazookaX = held.getVeldX() + stapX;
                     int bazookaY = held.getVeldY() + stapY;
-                    changeImage( bazookaX, bazookaY);
+                    changeImage(bazookaX, bazookaY);
                 }
-                if(!(kaart.getMap(held.getVeldX() + stapX, held.getVeldY() + stapY)instanceof Muur)) {
-                    System.out.println("we lopen");
+                if (!(kaart.getMap(held.getVeldX() + stapX, held.getVeldY() + stapY) instanceof Muur)) {
+                    //System.out.println("we lopen");
                     held.lopen(stapX, stapY);
+                    telStap();
                 }
             }
         }
-        
-        private void telStap() {
-            stappenteller++;
-            try {
-                doolhof.setTeller(stappenteller);
-            } catch (Exception e) {
-                System.out.println(e);
+    }
+
+    private void telStap() {
+        stappenteller++;
+        try {
+            doolhof.setTeller(stappenteller);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public void changeImage(int X, int Y) {
+        ArrayList copykaart = kaart.getMapObjects();
+    
+        int i = 0;
+        while (i < copykaart.size()) {
+
+            Veldbezetting A = kaart.mapObjects.get(i);
+            int x = A.getX(i);
+            int y = A.getY(i);
+            if (x == X && y == Y) {
+                System.out.println("positie in arraylist copykaart " + (i));
+                System.out.println("old image : " + copykaart.get(i));
+                copykaart.remove(i);
+                Gras gras = new Gras();
+                copykaart.add(i, gras);
+                System.out.println("positie in arraylist copykaart " + (i));
+                System.out.println("new image :" + copykaart.get(i));
+            } else {
+                i++;
             }
-        }
-        
-        public void changeImage(int X, int Y){
-            ArrayList copykaart = kaart.getMapObjects();
-            System.out.println(X);
-            System.out.println(Y);
-            String pos = Integer.toString(X)+ Integer.toString(Y);
-            int index = Integer.parseInt(pos);
-            System.out.println(pos);
-            copykaart.remove(index + 33);
-            Gras gras =  new Gras();
-            copykaart.add(index + 33, gras); 
-        }
-        
-        public void activeerSchietknop() {
-            doolhof.switchVisibilitySchietknop(true);
-        }
-        
-        public void deactiveerSchietnkop() {
-            doolhof.switchVisibilitySchietknop(false);
-        }
+        }repaint();
+
         
     }
 
+    public void activeerSchietknop() {
+        doolhof.switchVisibilitySchietknop(true);
+    }
+
+    public void deactiveerSchietnkop() {
+        doolhof.switchVisibilitySchietknop(false);
+    }
+
+    public void activeerSchietActie() {
+
+        held.schieten(held.getVeldX(), held.getVeldY());
+        changeImage(held.getSchietTargetX(), held.getSchietTargetY());
+
+    }
+
+    public void printPosities() {
+        ArrayList tempprint = kaart.getMapObjects();
+
+        int x = 0;
+        int y = 0;
+
+        for (int i = 0; i < tempprint.size(); i++) {
+            Veldbezetting A = kaart.mapObjects.get(i);
+            x = A.getX(i);
+            y = A.getY(i);
+            String pos = Integer.toString(x) + Integer.toString(y);
+            System.out.println(pos);
+            int index = Integer.parseInt(pos);
+
+            System.out.println("pos :" + i + "/stringxy " + pos + " object= " + tempprint.get(i) + " x: " + x + "y: " + y);
+
+        }
+
+    }
 }

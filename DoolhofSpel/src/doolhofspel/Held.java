@@ -11,6 +11,9 @@ import javax.swing.ImageIcon;
 public class Held extends Veldbezetting{
     private Plattegrond kaart;
     boolean bazookaJN;
+    String looprichting;
+    int schietTargetX;
+    int schietTargetY;
     
     public Held(){
         ImageIcon img = new ImageIcon("Pictures//held.png");
@@ -19,11 +22,14 @@ public class Held extends Veldbezetting{
         bazookaJN = false;
     }
     
-    // deze lijkt overbodig, je kunt toch super.setPositie aanroepen?
-//    public void resetHeld(){
-//        super.setPositie(1,1);
-//    }
-        
+    public void setRichting(String richting){
+        this.looprichting = richting;
+    }
+    
+    public String getRichting(){
+        return this.looprichting;
+    }
+           
     public int getVeldX(){
         return super.getX(1);
     }
@@ -32,29 +38,66 @@ public class Held extends Veldbezetting{
         return super.getY(1);
     }
     
+    public int getSchietTargetX(){
+        return this.schietTargetX;
+    }
+    
+    public int getSchietTargetY(){
+        return this.schietTargetY;
+    }
+    
     public void lopen (int vx, int vy){
         vx += getX(vx);
         vy += getY(vy);
         super.setPositie(vx,vy);
     }
     
-    public void schieten(int stapX, int stapY){
-       // ook nog inbouwen: situatie met meerdere grasvelden te overbruggen
-        kaart = new Plattegrond();
-        // de arraylist hieronder (schiet) wordt (nog?) niet gebruikt
-        // zoniet, dan kan  de import ook weg
-        ArrayList schiet = kaart.getMapObjects();
-        if (kaart.getMap(getVeldX() + stapX, getVeldY() + stapY) instanceof Muur){
-           System.out.println("SCHIET! MUUR, VERDWIJN!");
-           // nu naar changeImage
-        }
-//        if (stapX, stapY) instanceof Muur)) {
-//            int muurPos = stapX, stapY;
-//            schiet.remove(muurPos);
-//            Gras gras = new Gras();
-//            schiet.add(muurPos, gras);
-//        }
+    public void schieten(int X,int Y){
+
+        System.out.println("testschieten vanuit HELD");
+        System.out.println(this.looprichting);
+        int targetPosX = 0;
+        int targetPosY = 0;
+            if (this.getRichting().equals("right")){
+           
+            targetPosX = this.getVeldX() + 1;
+            targetPosY = this.getVeldY();
+            System.out.println("thisX: "+ this.getVeldX() +"thisY: "+ this.getVeldY());
+            System.out.println("targetX: "+ targetPosX +"targetY: "+ targetPosY);
+            }
+            
+            if (this.getRichting().equals("left")){
+            targetPosX = this.getVeldX() - 1;
+            targetPosY = this.getVeldY();
+            System.out.println("thisX: "+ this.getVeldX() +"thisY: "+ this.getVeldY());
+            System.out.println("targetX: "+ targetPosX +"targetY: "+ targetPosY);
+            }
+            
+            if (this.getRichting().equals("up")){
+           
+            targetPosX = this.getVeldX() ;
+            targetPosY = this.getVeldY()- 1;
+            System.out.println("thisX: "+ this.getVeldX() +"thisY: "+ this.getVeldY());
+            System.out.println("targetX: "+ targetPosX +"targetY: "+ targetPosY);
+            }
+            
+            if (this.getRichting().equals("down")){
+           
+            targetPosX = this.getVeldX() ;
+            targetPosY = this.getVeldY()+ 1;
+            System.out.println("thisX: "+ this.getVeldX() +"thisY: "+ this.getVeldY());
+            System.out.println("targetX: "+ targetPosX +"targetY: "+ targetPosY);
+            }
+            
+            schietTargetX = targetPosX;
+            schietTargetY = targetPosY;
+            
+            
     }
+    
+    
+        
+
     
     public void bazookaPakken(){
         bazookaJN = true;

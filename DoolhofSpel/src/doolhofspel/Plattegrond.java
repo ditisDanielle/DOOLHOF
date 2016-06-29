@@ -26,39 +26,18 @@ public class Plattegrond {
         closeFile();
     }
     
-    // overbodige code
-//    public int getMapgrootte(){
-//        return this.MAPGROOTTE;
-//    }
+
+    public int getMapgrootte(){
+        return this.MAPGROOTTE;
+    }
     
-    // dit is overbodige code, kan weg
-//    public Image makeGras() {
-//        Gras gras = new Gras();
-//        return gras.getImage();
-//    }
-//    
-//    public Image makeMuur() {
-//        Muur muur = new Muur();
-//        return muur.getImage();
-//    }
-//    
-//    public Image makeBazooka() {
-//        Bazooka bazooka = new Bazooka();
-//        return bazooka.getImage();
-//    }
-//    
-//    public Image makeVriend() {
-//        Vriend vriend = new Vriend();
-//        return vriend.getImage();
-//    }
-//    
-//    public Image makeStart() {
-//        return start;
-//    }
-//    
+    
+    
+    
     //inlezen veldbezetting
     public Veldbezetting getMap(int x, int y) {
         int index = x * (MAPGROOTTE) + y;
+        
         return mapObjects.get(index);
     }
     
@@ -78,25 +57,31 @@ public class Plattegrond {
                 String veld = line.substring(y,y+1);
                 if (veld.equals("g")) {
                     Gras gras = new Gras();
+                    gras.setPositie(z,y);
                     mapObjects.add(gras);
                 }
                 if (veld.equals("w")) {
                     Muur muur = new Muur();
+                    muur.setPositie(z,y);
                     mapObjects.add(muur);
                 }
                 if (veld.equals("b")) {
                     Bazooka bazooka = new Bazooka();
+                    bazooka.setPositie(z,y);
                     mapObjects.add(bazooka);
                 }
                 if (veld.equals("f")) {
                     Vriend vriend = new Vriend();
+                    vriend.setPositie(z,y);
                     mapObjects.add(vriend);
                 }        
                 // hier doen we niets mee, wellicht later een monster van maken
-                if (veld.equals("s")) {
-                    Vriend vriend = new Vriend();
-                    mapObjects.add(vriend);
-                }
+//                if (veld.equals("s")) {
+//                    Vriend vriend = new Vriend();
+//                    vriend.setPositie(z,y);
+//
+//                    mapObjects.add(vriend);
+//                }
             }
         }
     }      

@@ -11,9 +11,7 @@ public abstract class Veldbezetting {
     private Image afbeelding;
     private int veldX, veldY;
     
-    public Veldbezetting(){
     
-    }
     
     public void setImage(Image afbeelding){
       this.afbeelding = afbeelding;
@@ -34,6 +32,14 @@ public abstract class Veldbezetting {
     
     public int getY(int y){
         return y = this.veldY;
+    }
+    
+    public int getX() {
+        return this.veldX;
+    }
+
+    public int getY() {
+        return this.veldY;
     }
     
 }

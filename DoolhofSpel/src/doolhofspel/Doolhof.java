@@ -32,10 +32,13 @@ class Doolhof implements ActionListener{
     JButton schietKnop;
     JButton teller;
     JButton tellerlabel;
+    Bord bord;
+   // String naamDoolhof;
 
     
     public Doolhof() {
         // maak een gameframe
+        bord = new Bord(this);
         spelframe = new JFrame();
         spelframe.setTitle("Zoek je vriend!");
         	
@@ -101,7 +104,8 @@ class Doolhof implements ActionListener{
         buttonpanel.add(centerdummy, BorderLayout.CENTER);
 
         // alle panels toevoegen aan het uiteindelijke gamepanel
-        gamepanel.add(new Bord(this));
+        gamepanel.add(bord);
+        //System.out.println("aanmaken bord in doolhof regel 104: " + new Bord(this).toString());
         gamepanel.add(oostpanel);
         oostpanel.add(buttonpanel, BorderLayout.CENTER);
 
@@ -110,9 +114,14 @@ class Doolhof implements ActionListener{
         spelframe.setVisible(true);
     }
     
+//    @Override
+//    public String toString(){
+//        return naamDoolhof;
+//    }
+    
     public void setTeller(int aantal){
         String telling  = Integer.toString(aantal);
-        System.out.println(telling);
+        //System.out.println(telling);
         teller.setText(telling);
     }
    
@@ -144,17 +153,17 @@ class Doolhof implements ActionListener{
         }
     }
     
-    private static class SchietListener implements ActionListener{
+    private class SchietListener implements ActionListener{
         public SchietListener() {
 
         }
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("schietknoplistener geactiveerd");
-            Held held = new Held();
-            int targetPosX = held.getVeldX();
-            int targetPosY = held.getVeldY();
-            held.schieten(targetPosX, targetPosY);
+           
+           
+        bord.activeerSchietActie();
+            
         }
     }
 
