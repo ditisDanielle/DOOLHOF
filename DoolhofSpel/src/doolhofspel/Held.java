@@ -1,6 +1,5 @@
 package doolhofspel;
 
-import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
 /**
@@ -9,7 +8,7 @@ import javax.swing.ImageIcon;
  */
 
 public class Held extends Veldbezetting{
-    private Plattegrond kaart;
+//    private Plattegrond kaart;
     boolean bazookaJN;
     String looprichting;
     int schietTargetX;
@@ -53,54 +52,36 @@ public class Held extends Veldbezetting{
     }
     
     public void schieten(int X,int Y){
-
         System.out.println("testschieten vanuit HELD");
         System.out.println(this.looprichting);
         int targetPosX = 0;
         int targetPosY = 0;
-            if (this.getRichting().equals("right")){
-           
+        if (this.getRichting().equals("right")){
             targetPosX = this.getVeldX() + 1;
             targetPosY = this.getVeldY();
             System.out.println("thisX: "+ this.getVeldX() +"thisY: "+ this.getVeldY());
             System.out.println("targetX: "+ targetPosX +"targetY: "+ targetPosY);
-            }
-            
-            if (this.getRichting().equals("left")){
+        }
+        if (this.getRichting().equals("left")){
             targetPosX = this.getVeldX() - 1;
             targetPosY = this.getVeldY();
             System.out.println("thisX: "+ this.getVeldX() +"thisY: "+ this.getVeldY());
             System.out.println("targetX: "+ targetPosX +"targetY: "+ targetPosY);
-            }
-            
-            if (this.getRichting().equals("up")){
-           
+        }
+        if (this.getRichting().equals("up")){
             targetPosX = this.getVeldX() ;
             targetPosY = this.getVeldY()- 1;
             System.out.println("thisX: "+ this.getVeldX() +"thisY: "+ this.getVeldY());
             System.out.println("targetX: "+ targetPosX +"targetY: "+ targetPosY);
-            }
-            
-            if (this.getRichting().equals("down")){
-           
+        }
+        if (this.getRichting().equals("down")){
             targetPosX = this.getVeldX() ;
             targetPosY = this.getVeldY()+ 1;
             System.out.println("thisX: "+ this.getVeldX() +"thisY: "+ this.getVeldY());
             System.out.println("targetX: "+ targetPosX +"targetY: "+ targetPosY);
-            }
-            
-            schietTargetX = targetPosX;
-            schietTargetY = targetPosY;
-            
-            
+        }
+        schietTargetX = targetPosX;
+        schietTargetY = targetPosY;
     }
-    
-    
-        
 
-    
-    public void bazookaPakken(){
-        bazookaJN = true;
-        // zie verder ook methode die onder Bord en daar dus niet hoort, maar die we niet aan de praat krijgen hier
-    }
 }

@@ -16,13 +16,5 @@ public class Bazooka extends Tempbezetting {
         super.setPositie(1,1);
     }
 
-//    public void muurVernietigen(){
-//
-//    }
-    
-//    public String toString(){
-//        return "test";
-//    }
-    
 }
 

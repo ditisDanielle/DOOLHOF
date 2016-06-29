@@ -1,6 +1,5 @@
 package doolhofspel;
 
-import java.awt.Image;
 import javax.swing.ImageIcon;
 
 /**
@@ -11,13 +10,11 @@ import javax.swing.ImageIcon;
 public class Valsspeler extends Tempbezetting {
      
     public Valsspeler(){
-        // AFBEELDING NOG TOEVOEGEN
         ImageIcon img = new ImageIcon();
         super.setImage(img.getImage());
         super.setPositie(1,1);
     }
 
-          
     // waarden 1 nog vervangen door variabelenaam
     public int getVeldX(){
         return super.getX(1);

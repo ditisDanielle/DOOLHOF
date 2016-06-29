@@ -14,30 +14,23 @@ import javax.swing.ImageIcon;
 public class Plattegrond {
     private Scanner file;
     private final int MAPGROOTTE = 21;
-    private final Image start;
     public ArrayList<Veldbezetting> mapObjects = new ArrayList<>();
     
     public Plattegrond() {
         ImageIcon img;
-        img = new ImageIcon("Pictures//start.png");
-        start = img.getImage();
+//        img = new ImageIcon("Pictures//start.png");
         openFile();
         readFile();
         closeFile();
     }
     
-
     public int getMapgrootte(){
         return this.MAPGROOTTE;
     }
     
-    
-    
-    
     //inlezen veldbezetting
     public Veldbezetting getMap(int x, int y) {
         int index = x * (MAPGROOTTE) + y;
-        
         return mapObjects.get(index);
     }
     
@@ -75,13 +68,11 @@ public class Plattegrond {
                     vriend.setPositie(z,y);
                     mapObjects.add(vriend);
                 }        
-                // hier doen we niets mee, wellicht later een monster van maken
-//                if (veld.equals("s")) {
-//                    Vriend vriend = new Vriend();
-//                    vriend.setPositie(z,y);
-//
-//                    mapObjects.add(vriend);
-//                }
+                if (veld.equals("h")) {
+                    Helper helper = new Helper();
+                    helper.setPositie(z,y);
+                    mapObjects.add(helper);
+                }
             }
         }
     }      
@@ -89,9 +80,6 @@ public class Plattegrond {
     public ArrayList getMapObjects() {
         return mapObjects;
     }
-     
-     
-       
     
     public void closeFile() {
         file.close();

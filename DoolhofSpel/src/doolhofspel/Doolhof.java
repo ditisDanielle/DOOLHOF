@@ -33,8 +33,6 @@ class Doolhof implements ActionListener{
     JButton teller;
     JButton tellerlabel;
     Bord bord;
-   // String naamDoolhof;
-
     
     public Doolhof() {
         // maak een gameframe
@@ -114,14 +112,8 @@ class Doolhof implements ActionListener{
         spelframe.setVisible(true);
     }
     
-//    @Override
-//    public String toString(){
-//        return naamDoolhof;
-//    }
-    
     public void setTeller(int aantal){
         String telling  = Integer.toString(aantal);
-        //System.out.println(telling);
         teller.setText(telling);
     }
    
@@ -134,7 +126,8 @@ class Doolhof implements ActionListener{
        }
    }
 
-    @Override // deze komt mee vanwege implements ActionListener
+    @Override 
+    // deze komt mee vanwege implements ActionListener
     public void actionPerformed(ActionEvent e) {
         return;
     }
@@ -149,7 +142,6 @@ class Doolhof implements ActionListener{
             System.out.println("resetlistener geactiveerd");
             Doolhof doolhof = new Doolhof();
             gamepanel.add(new Bord(doolhof));
-            //resetDoolhof();
         }
     }
     
@@ -160,10 +152,7 @@ class Doolhof implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("schietknoplistener geactiveerd");
-           
-           
-        bord.activeerSchietActie();
-            
+            bord.activeerSchietActie();
         }
     }
 
