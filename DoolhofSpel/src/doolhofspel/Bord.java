@@ -100,9 +100,16 @@ public class Bord extends JPanel implements ActionListener {
         }
 
         public void checkVeld(int stapX, int stapY) {
-            // afvangen
-            if (held.getVeldX() + stapX == 21 || held.getVeldY() + stapY == 21) {
-                System.out.println("OUT OF RANGE");
+            // afvangen, zodat je niet een index out of range error krijgt als je van het veld loopt
+            // ik houd niet van die foutmeldingen :-)
+            // wel nog even goed testen!
+            if (held.getVeldX() + stapX == 21) {
+                System.out.println("X OUT OF RANGE");
+                stapX = 0;
+            }
+            if (held.getVeldY() + stapY == 21) {
+                System.out.println("Y OUT OF RANGE");
+                stapY = 0;
             }
             if (kaart.getMap(held.getVeldX() + stapX, held.getVeldY() + stapY) instanceof Held) {
                 System.out.println("Niet lopen, je zit bij de start");
