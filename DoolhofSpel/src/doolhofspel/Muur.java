@@ -14,7 +14,10 @@ import javax.swing.ImageIcon;
         super.setImage(img.getImage());
         super.setPositie(1,1);
     }
-
-    }
+        
+        public void wordtOpgeblazen(){
+            //verander plaatje naar gras
+        }
+}
 
 

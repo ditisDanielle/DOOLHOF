@@ -1,12 +1,17 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package doolhofspel;
 
+import java.awt.Image;
 import javax.swing.ImageIcon;
 
 /**
  *
  * @author Danielle en Agnita (Groep 7)
  */
-<<<<<<< HEAD
 public class Helper extends Tempbezetting {
 
     public Helper() {
@@ -16,17 +21,6 @@ public class Helper extends Tempbezetting {
 
     }
 
-=======
-
-public class Helper extends Tempbezetting{
-    
-    public Helper(){
-        ImageIcon img = new ImageIcon("Pictures//helper.png");
-        super.setImage(img.getImage());
-        super.setPositie(1,1);
-    }
-          
->>>>>>> 66afe075fb2cd701a8231776356bbe8a372581eb
     // waarden 1 nog vervangen door variabelenaam
     public int getVeldX() {
         return super.getX(1);
@@ -46,9 +40,5 @@ public class Helper extends Tempbezetting{
         // indien mogelijk ga je terug naar het laatste kruispunt, waar je minimaal twee mogelijke routes had
         // repeat, en overschrijf de kortste route telkens als die korter is dan de opgeslagen route
         // geen kruispunten meer, dan heb je de kortste route, die kun je dan "tekenen"
-    }
-    
-    public void reduxStappenTeller() {
-        
     }
 }
