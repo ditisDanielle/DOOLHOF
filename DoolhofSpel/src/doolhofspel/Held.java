@@ -1,6 +1,5 @@
 package doolhofspel;
 
-import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
 /**
@@ -9,7 +8,6 @@ import javax.swing.ImageIcon;
  */
 
 public class Held extends Veldbezetting{
-    private Plattegrond kaart;
     boolean bazookaJN;
     String looprichting;
     int schietTargetX;
@@ -61,8 +59,8 @@ public class Held extends Veldbezetting{
     }
     
     public void schieten(int X,int Y){
-     schietTargetX = X;
-     schietTargetY = Y;
+        schietTargetX = X;
+        schietTargetY = Y;
     }
     
     public void bazookaPakken(){

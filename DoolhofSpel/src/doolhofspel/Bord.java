@@ -17,9 +17,9 @@ public class Bord extends JPanel implements ActionListener {
     private Plattegrond kaart;
     private Held held;
     private int stappenteller;
-    // zie commentaar over bazooka bij de constructor
     private Bazooka bazooka;
     private Vriend vriend;
+    private Valsspeler valsspeler;
     private final int VELDBREEDTE = 32; // breedte afbeelding in pixels
     private final int VELDHOOGTE = 32; // breedte afbeelding in pixels
     private int stapX;
@@ -29,6 +29,7 @@ public class Bord extends JPanel implements ActionListener {
     public Bord(Doolhof doolhof) {
         kaart = new Plattegrond();
         held = new Held();
+        valsspeler = new Valsspeler();
         bazooka = new Bazooka();
         vriend = new Vriend();
         addKeyListener(new PijltjesListener());
@@ -98,7 +99,6 @@ public class Bord extends JPanel implements ActionListener {
          deze methode checkt of het volgende veld geen muur is en of zich er een bazooka, vriend of helper bevindt
          */
         public void checkVeld(int stapX, int stapY) {
-
             if (kaart.getMap(held.getVeldX() + stapX, held.getVeldY() + stapY) instanceof Vriend) {
                 System.out.println("Vriend gevonden!!!");
             }
@@ -110,15 +110,17 @@ public class Bord extends JPanel implements ActionListener {
                 int bazookaY = held.getVeldY() + stapY;
                 changeImage(bazookaX, bazookaY);
             }
-
             if (kaart.getMap(held.getVeldX() + stapX, held.getVeldY() + stapY) instanceof Helper) {
                 System.out.println("Helper!!");
                 int helperX = held.getVeldX() + stapX;
                 int helperY = held.getVeldY() + stapY;
                 changeImage(helperX, helperY);
             }
+            if (kaart.getMap(held.getVeldX() + stapX, held.getVeldY() + stapY) instanceof Valsspeler) {
+                System.out.println("VALSSPELER!!");
+                stappenteller = stappenteller - 20;
+            }
             if (!(kaart.getMap(held.getVeldX() + stapX, held.getVeldY() + stapY) instanceof Muur)) {
-                //System.out.println("we lopen");
                 held.lopen(stapX, stapY);
                 telStap();
             }
@@ -142,7 +144,6 @@ public class Bord extends JPanel implements ActionListener {
 
         int i = 0;
         while (i < copykaart.size()) {
-
             Veldbezetting A = kaart.mapObjects.get(i);
             int x = A.getX(i);
             int y = A.getY(i);
@@ -159,7 +160,6 @@ public class Bord extends JPanel implements ActionListener {
             }
         }
         repaint();
-
     }
 
     public void activeerSchietknop() {
@@ -216,21 +216,17 @@ public class Bord extends JPanel implements ActionListener {
      */
     public void printPosities() {
         ArrayList tempprint = kaart.getMapObjects();
-
         int x = 0;
         int y = 0;
-
         for (int i = 0; i < tempprint.size(); i++) {
             Veldbezetting A = kaart.mapObjects.get(i);
             x = A.getX(i);
             y = A.getY(i);
             String pos = Integer.toString(x) + Integer.toString(y);
             System.out.println(pos);
-            int index = Integer.parseInt(pos);
-
+//            int index = Integer.parseInt(pos);
             System.out.println("pos :" + i + "/stringxy " + pos + " object= " + tempprint.get(i) + " x: " + x + "y: " + y);
-
         }
-
     }
+    
 }

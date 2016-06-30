@@ -15,5 +15,6 @@ public class Bazooka extends Tempbezetting {
         super.setImage(img.getImage());
         super.setPositie(1,1);
     }
+    
 }
 
