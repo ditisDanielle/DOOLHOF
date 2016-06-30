@@ -99,6 +99,24 @@ public class Bord extends JPanel implements ActionListener {
          deze methode checkt of het volgende veld geen muur is en of zich er een bazooka, vriend of helper bevindt
          */
         public void checkVeld(int stapX, int stapY) {
+            // Hier zorgen  we ervoor dat onze held niet van het bord afloopt bij wijze van
+            // want dat veroorzaakt een IndexOutOfBoundsException
+            if (held.getVeldX() + stapX == 21) {
+                stapX = 0;
+            }
+            if (held.getVeldY() + stapY == 21) {
+                stapY = 0;
+            }
+            if (held.getVeldX() + stapX < 0) {
+                stapX = 0;
+            }
+            if (held.getVeldY() + stapY < 0) {
+                stapY = 0;
+            }
+            if (kaart.getMap(held.getVeldX() + stapX, held.getVeldY() + stapY) instanceof Held) {
+                System.out.println("Niet lopen, je zit bij de start");
+            } 
+            
             if (kaart.getMap(held.getVeldX() + stapX, held.getVeldY() + stapY) instanceof Vriend) {
                 System.out.println("Vriend gevonden!!!");
             }
@@ -141,7 +159,6 @@ public class Bord extends JPanel implements ActionListener {
 
     public void changeImage(int X, int Y) {
         ArrayList copykaart = kaart.getMapObjects();
-
         int i = 0;
         while (i < copykaart.size()) {
             Veldbezetting A = kaart.mapObjects.get(i);
@@ -181,33 +198,41 @@ public class Bord extends JPanel implements ActionListener {
      deze methode stelt het schietdoel vast (de eerstvolgende muur)
      */
     public void activeerSchietActie(int tempX, int tempY) {
-        // ophalen target
-        held.schieten(tempX, tempY);
-        if ((kaart.getMap(held.getSchietTargetX(), held.getSchietTargetY()) instanceof Muur)) {
-            changeImage(held.getSchietTargetX(), held.getSchietTargetY());
-            return;
-        }
-        //als target veld != muur, check volgende veld
-        if (!(kaart.getMap(held.getSchietTargetX(), held.getSchietTargetY()) instanceof Muur)) {
-            if (held.getRichting().equals("right")) {
-                tempX++;
+        // vermijden dat we bij wijze van spreken van het bord af schieten en daardoor
+        // een IndexOutOfBoundsException veroorzaken
+        if (tempX < 21 || tempX < 21) {
+            if (tempX >= 0) {
+                if (tempY >= 0) {
+                // ophalen target
                 held.schieten(tempX, tempY);
+                if ((kaart.getMap(held.getSchietTargetX(), held.getSchietTargetY()) instanceof Muur)) {
+                    changeImage(held.getSchietTargetX(), held.getSchietTargetY());
+                    return;
+                }
+                //als target veld != muur, check volgende veld
+                if (!(kaart.getMap(held.getSchietTargetX(), held.getSchietTargetY()) instanceof Muur)) {
+                    if (held.getRichting().equals("right")) {
+                        tempX++;
+                        held.schieten(tempX, tempY);
+                    }
+                    if (held.getRichting().equals("left")) {
+                        tempX--;
+                        held.schieten(tempX, tempY);
+                    }
+                    if (held.getRichting().equals("up")) {
+                        tempY--;
+                        held.schieten(tempX, tempY);
+                    }
+                    if (held.getRichting().equals("down")) {
+                        tempY++;
+                        held.schieten(tempX, tempY);
+                    }
+                    activeerSchietActie(tempX, tempY);
+                }
+                    changeImage(held.getSchietTargetX(), held.getSchietTargetY());
+                }    
             }
-            if (held.getRichting().equals("left")) {
-                tempX--;
-                held.schieten(tempX, tempY);
-            }
-            if (held.getRichting().equals("up")) {
-                tempY--;
-                held.schieten(tempX, tempY);
-            }
-            if (held.getRichting().equals("down")) {
-                tempY++;
-                held.schieten(tempX, tempY);
-            }
-            activeerSchietActie(tempX, tempY);
-        }
-        changeImage(held.getSchietTargetX(), held.getSchietTargetY());
+        }    
     }
 
     /*
