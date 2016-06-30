@@ -1,6 +1,7 @@
 package doolhofspel;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.GridLayout;
@@ -29,6 +30,7 @@ class Doolhof implements ActionListener {
     JPanel centerdummy;
     JButton reset;
     JButton schietKnop;
+    JButton eindeSpelKnop;
     JButton teller;
     JButton tellerlabel;
     Bord bord;
@@ -69,6 +71,13 @@ class Doolhof implements ActionListener {
         schietKnop.addActionListener(this);
         schietKnop.addActionListener(new SchietListener());
 
+        // eindeSpelKnop, niet  zichtbaar tot we onze vriend gevonden hebben
+        eindeSpelKnop = new JButton();
+        eindeSpelKnop.setFocusable(false);
+        eindeSpelKnop.setBackground(Color.pink);
+        eindeSpelKnop.setVisible(false);
+        eindeSpelKnop.setText("VRIEND GEVONDEN!!!");
+        
         // Tellerlabel
         tellerlabel = new JButton();
         tellerlabel.setText("Aantal gezette stappen:");
@@ -97,7 +106,8 @@ class Doolhof implements ActionListener {
         centerdummy.add(schietKnop, BorderLayout.SOUTH);
         centerdummy.add(tellerlabel, BorderLayout.WEST);
         centerdummy.add(teller, BorderLayout.CENTER);
-
+        centerdummy.add(eindeSpelKnop, BorderLayout.EAST);
+        
         buttonpanel.add(centerdummy, BorderLayout.CENTER);
 
         // alle panels toevoegen aan het uiteindelijke gamepanel
@@ -123,6 +133,10 @@ class Doolhof implements ActionListener {
         } else if (b == false) {
             schietKnop.setVisible(true);
         }
+    }
+    
+    public void eindeSpelKnop() {
+        eindeSpelKnop.setVisible(true);
     }
 
     // deze komt mee vanwege implements ActionListener

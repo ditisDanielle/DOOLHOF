@@ -119,6 +119,7 @@ public class Bord extends JPanel implements ActionListener {
             
             if (kaart.getMap(held.getVeldX() + stapX, held.getVeldY() + stapY) instanceof Vriend) {
                 System.out.println("Vriend gevonden!!!");
+                eindeSpelKnop();
             }
             if (kaart.getMap(held.getVeldX() + stapX, held.getVeldY() + stapY) instanceof Bazooka) {
                 //System.out.println("Found bazooka!");
@@ -233,6 +234,10 @@ public class Bord extends JPanel implements ActionListener {
                 }    
             }
         }    
+    }
+    
+    public void eindeSpelKnop() { 
+        doolhof.eindeSpelKnop();
     }
 
     /*
