@@ -6,6 +6,17 @@ import javax.swing.ImageIcon;
  *
  * @author Danielle en Agnita (Groep 7)
  */
+<<<<<<< HEAD
+public class Helper extends Tempbezetting {
+
+    public Helper() {
+        ImageIcon img = new ImageIcon("Pictures//helper.png");
+        super.setImage(img.getImage());
+        super.setPositie(12, 6);
+
+    }
+
+=======
 
 public class Helper extends Tempbezetting{
     
@@ -15,16 +26,17 @@ public class Helper extends Tempbezetting{
         super.setPositie(1,1);
     }
           
+>>>>>>> 66afe075fb2cd701a8231776356bbe8a372581eb
     // waarden 1 nog vervangen door variabelenaam
-    public int getVeldX(){
+    public int getVeldX() {
         return super.getX(1);
     }
-    
-    public int getVeldY(){
+
+    public int getVeldY() {
         return super.getY(1);
     }
-    
-    public void routeTonen(){
+
+    public void routeTonen() {
         // pseudo code kortste route berekenen (staat natuurlijk niet op de goede plek, maar for now
         // het is niet van belang om te beginnen met de kortste route, we gaan de route bereken naar de vriend
         // kijk bij elke stap wat er op je pad zit, dus ook of je meerdere wegen kan inslaan

@@ -28,7 +28,12 @@ public class Bord extends JPanel implements ActionListener {
     public Bord(Doolhof doolhof) {
         kaart = new Plattegrond();
         held = new Held();
+<<<<<<< HEAD
+        bazooka = new Bazooka();
+        vriend = new Vriend();
+=======
         gras = new Gras();
+>>>>>>> 66afe075fb2cd701a8231776356bbe8a372581eb
         addKeyListener(new PijltjesListener());
         setFocusable(true);
         this.doolhof = doolhof;
@@ -42,6 +47,7 @@ public class Bord extends JPanel implements ActionListener {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
+        // teken het bord
         for (int x = 0; x < 21; x++) {
             for (int y = 0; y < 21; y++) {
                 Veldbezetting veld = kaart.getMap(x, y);
@@ -60,9 +66,14 @@ public class Bord extends JPanel implements ActionListener {
                     g.drawImage(veld.getImage(), x * VELDBREEDTE, y * VELDHOOGTE, null);
                 }
             }
+            //plaats held op het bord
             g.drawImage(held.getImage(), held.getVeldX() * 32, held.getVeldY() * 32, null);
+
         }
     }
+    /*
+     listener tbv de pijltjestoetsen waarmee je de held kan laten lopen
+     */
 
     public class PijltjesListener extends KeyAdapter {
 
@@ -94,12 +105,39 @@ public class Bord extends JPanel implements ActionListener {
                     held.setRichting("up");
                     break;
             }
-            // een aparte method gemaakt, om het overzichtelijk te houden
             checkVeld(stapX, stapY);
             repaint();
         }
 
+        /*
+         deze methode checkt of het volgende veld geen muur is en of zich er een bazooka, vriend of helper bevindt
+         */
         public void checkVeld(int stapX, int stapY) {
+<<<<<<< HEAD
+
+            if (kaart.getMap(held.getVeldX() + stapX, held.getVeldY() + stapY) instanceof Vriend) {
+                System.out.println("Vriend gevonden!!!");
+            }
+            if (kaart.getMap(held.getVeldX() + stapX, held.getVeldY() + stapY) instanceof Bazooka) {
+                //System.out.println("Found bazooka!");
+                activeerSchietknop();
+                held.bazookaPakken();
+                int bazookaX = held.getVeldX() + stapX;
+                int bazookaY = held.getVeldY() + stapY;
+                changeImage(bazookaX, bazookaY);
+            }
+
+            if (kaart.getMap(held.getVeldX() + stapX, held.getVeldY() + stapY) instanceof Helper) {
+                System.out.println("Helper!!");
+                int helperX = held.getVeldX() + stapX;
+                int helperY = held.getVeldY() + stapY;
+                changeImage(helperX, helperY);
+            }
+            if (!(kaart.getMap(held.getVeldX() + stapX, held.getVeldY() + stapY) instanceof Muur)) {
+                //System.out.println("we lopen");
+                held.lopen(stapX, stapY);
+                telStap();
+=======
             // afvangen, zodat je niet een index out of range error krijgt als je van het veld loopt
             // ik houd niet van die foutmeldingen :-)
             // wel nog even goed testen!
@@ -140,10 +178,14 @@ public class Bord extends JPanel implements ActionListener {
                     held.lopen(stapX, stapY);
                     telStap();
                 }
+>>>>>>> 66afe075fb2cd701a8231776356bbe8a372581eb
             }
         }
     }
 
+    /*
+     deze methode houdt het aantal genomen stappen bij
+     */
     private void telStap() {
         stappenteller++;
         try {
@@ -157,6 +199,29 @@ public class Bord extends JPanel implements ActionListener {
     // nu even geen tijd meer over
     public void changeImage(int X, int Y, String whatsIt) {
         ArrayList copykaart = kaart.getMapObjects();
+<<<<<<< HEAD
+
+        int i = 0;
+        while (i < copykaart.size()) {
+
+            Veldbezetting A = kaart.mapObjects.get(i);
+            int x = A.getX(i);
+            int y = A.getY(i);
+            if (x == X && y == Y) {
+//                System.out.println("positie in arraylist copykaart " + (i));
+//                System.out.println("old image : " + copykaart.get(i));
+                copykaart.remove(i);
+                Gras gras = new Gras();
+                copykaart.add(i, gras);
+//                System.out.println("positie in arraylist copykaart " + (i));
+//                System.out.println("new image :" + copykaart.get(i));
+            } else {
+                i++;
+            }
+        }
+        repaint();
+
+=======
         int i = 0;
         if (whatsIt.equals("bazooka")) {
             while (i < copykaart.size()) {
@@ -199,6 +264,7 @@ public class Bord extends JPanel implements ActionListener {
             }    
         }
         repaint();
+>>>>>>> 66afe075fb2cd701a8231776356bbe8a372581eb
     }
 
     public void activeerSchietknop() {
@@ -210,11 +276,55 @@ public class Bord extends JPanel implements ActionListener {
     }
 
     public void activeerSchietActie() {
+<<<<<<< HEAD
+        // ophalen target
+        int tempX = held.getVeldX();
+        int tempY = held.getVeldY();
+        activeerSchietActie(tempX, tempY);
+    }
+
+    /*
+     deze methode stelt het schietdoel vast (de eerstvolgende muur)
+     */
+    public void activeerSchietActie(int tempX, int tempY) {
+        // ophalen target
+        held.schieten(tempX, tempY);
+        if ((kaart.getMap(held.getSchietTargetX(), held.getSchietTargetY()) instanceof Muur)) {
+            changeImage(held.getSchietTargetX(), held.getSchietTargetY());
+            return;
+        }
+        //als target veld != muur, check volgende veld
+        if (!(kaart.getMap(held.getSchietTargetX(), held.getSchietTargetY()) instanceof Muur)) {
+            if (held.getRichting().equals("right")) {
+                tempX++;
+                held.schieten(tempX, tempY);
+            }
+            if (held.getRichting().equals("left")) {
+                tempX--;
+                held.schieten(tempX, tempY);
+            }
+            if (held.getRichting().equals("up")) {
+                tempY--;
+                held.schieten(tempX, tempY);
+            }
+            if (held.getRichting().equals("down")) {
+                tempY++;
+                held.schieten(tempX, tempY);
+            }
+            activeerSchietActie(tempX, tempY);
+        }
+        changeImage(held.getSchietTargetX(), held.getSchietTargetY());
+=======
         String whatsIt = "bazooka";
         held.schieten(held.getVeldX(), held.getVeldY());
         changeImage(held.getSchietTargetX(), held.getSchietTargetY(), whatsIt);
+>>>>>>> 66afe075fb2cd701a8231776356bbe8a372581eb
     }
 
+    /*
+     deze methode is een hulpmethode bij het programmeren en print alle veldbezettingen met hun indexnr en x en y 
+     activeren in regel 37
+     */
     public void printPosities() {
         ArrayList tempprint = kaart.getMapObjects();
         int x = 0;

@@ -44,33 +44,38 @@ public class Plattegrond {
     }
     
     public void readFile() {
-        for (int z = 0; z < MAPGROOTTE; z++) {
+        for (int x = 0; x < MAPGROOTTE; x++) {
             String line = file.next();
             for (int y = 0; y < MAPGROOTTE; y++) {
                 String veld = line.substring(y,y+1);
                 if (veld.equals("g")) {
                     Gras gras = new Gras();
-                    gras.setPositie(z,y);
+                    gras.setPositie(x,y);
                     mapObjects.add(gras);
                 }
                 if (veld.equals("w")) {
                     Muur muur = new Muur();
-                    muur.setPositie(z,y);
+                    muur.setPositie(x,y);
                     mapObjects.add(muur);
                 }
                 if (veld.equals("b")) {
                     Bazooka bazooka = new Bazooka();
-                    bazooka.setPositie(z,y);
+                    bazooka.setPositie(x,y);
                     mapObjects.add(bazooka);
                 }
                 if (veld.equals("f")) {
                     Vriend vriend = new Vriend();
-                    vriend.setPositie(z,y);
+                    vriend.setPositie(x,y);
                     mapObjects.add(vriend);
                 }        
                 if (veld.equals("h")) {
                     Helper helper = new Helper();
+<<<<<<< HEAD
+                    helper.setPositie(x,y);
+
+=======
                     helper.setPositie(z,y);
+>>>>>>> 66afe075fb2cd701a8231776356bbe8a372581eb
                     mapObjects.add(helper);
                 }
             }

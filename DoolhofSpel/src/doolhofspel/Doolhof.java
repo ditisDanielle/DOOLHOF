@@ -14,8 +14,7 @@ import javax.swing.JPanel;
  *
  * @author Agnita & Danielle (Groep 7)
  */
-
-class Doolhof implements ActionListener{
+class Doolhof implements ActionListener {
 
     int buttonSizeHeight = 1; // later FINAL maken
     int buttonSizesWidth = 3;// later FINAL maken
@@ -33,13 +32,18 @@ class Doolhof implements ActionListener{
     JButton teller;
     JButton tellerlabel;
     Bord bord;
+<<<<<<< HEAD
+   // String naamDoolhof;
+
+=======
     
+>>>>>>> 66afe075fb2cd701a8231776356bbe8a372581eb
     public Doolhof() {
         // maak een gameframe
         bord = new Bord(this);
         spelframe = new JFrame();
         spelframe.setTitle("Zoek je vriend!");
-        	
+
         spelframe.setExtendedState(Frame.MAXIMIZED_BOTH);
         spelframe.setLocationRelativeTo(null);
         spelframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -65,15 +69,15 @@ class Doolhof implements ActionListener{
         schietKnop = new JButton();
         schietKnop.setSize(buttonSizeHeight, buttonSizesWidth);
         schietKnop.setText("Schieten!");
-        schietKnop.setVisible(false); 
+        schietKnop.setVisible(false);
         schietKnop.setFocusable(false);
         schietKnop.addActionListener(this);
-        schietKnop.addActionListener (new SchietListener());
-                
+        schietKnop.addActionListener(new SchietListener());
+
         // Tellerlabel
-        tellerlabel =new JButton();
+        tellerlabel = new JButton();
         tellerlabel.setText("Aantal gezette stappen:");
-        
+
         //  Teller
         teller = new JButton();
         teller.setText("0");
@@ -98,7 +102,7 @@ class Doolhof implements ActionListener{
         centerdummy.add(schietKnop, BorderLayout.SOUTH);
         centerdummy.add(tellerlabel, BorderLayout.WEST);
         centerdummy.add(teller, BorderLayout.CENTER);
-        
+
         buttonpanel.add(centerdummy, BorderLayout.CENTER);
 
         // alle panels toevoegen aan het uiteindelijke gamepanel
@@ -111,20 +115,26 @@ class Doolhof implements ActionListener{
         spelframe.add(gamepanel);
         spelframe.setVisible(true);
     }
+<<<<<<< HEAD
+
+    public void setTeller(int aantal) {
+        String telling = Integer.toString(aantal);
+        //System.out.println(telling);
+=======
     
     public void setTeller(int aantal){
         String telling  = Integer.toString(aantal);
+>>>>>>> 66afe075fb2cd701a8231776356bbe8a372581eb
         teller.setText(telling);
     }
-   
-    public void switchVisibilitySchietknop(boolean b){
-        if(b==true){
+
+    public void switchVisibilitySchietknop(boolean b) {
+        if (b == true) {
+            schietKnop.setVisible(true);
+        } else if (b == false) {
             schietKnop.setVisible(true);
         }
-        else if (b == false){
-            schietKnop.setVisible(true);
-       }
-   }
+    }
 
     @Override 
     // deze komt mee vanwege implements ActionListener
@@ -133,26 +143,36 @@ class Doolhof implements ActionListener{
     }
 
     // de resetlistener, deze moet het level gaan resetten
-    private  class ResetListener implements ActionListener{
+    private class ResetListener implements ActionListener {
+
         public ResetListener() {
 
         }
+
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println("resetlistener geactiveerd");
+            //System.out.println("resetlistener geactiveerd");
             Doolhof doolhof = new Doolhof();
             gamepanel.add(new Bord(doolhof));
         }
     }
-    
-    private class SchietListener implements ActionListener{
+
+    private class SchietListener implements ActionListener {
+
         public SchietListener() {
 
         }
+
         @Override
         public void actionPerformed(ActionEvent e) {
+<<<<<<< HEAD
+            //System.out.println("schietknoplistener geactiveerd");
+            bord.activeerSchietActie();
+
+=======
             System.out.println("schietknoplistener geactiveerd");
             bord.activeerSchietActie();
+>>>>>>> 66afe075fb2cd701a8231776356bbe8a372581eb
         }
     }
 

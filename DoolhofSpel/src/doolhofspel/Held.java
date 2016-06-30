@@ -45,6 +45,14 @@ public class Held extends Veldbezetting{
         return this.schietTargetY;
     }
     
+    public void setSchietTargetX(int x){
+        this.schietTargetX = x;
+    }
+    
+    public void setSchietTargetY(int y){
+        this.schietTargetY = y;
+    }
+    
     public void lopen (int vx, int vy){
         vx += getX(vx);
         vy += getY(vy);
@@ -52,6 +60,15 @@ public class Held extends Veldbezetting{
     }
     
     public void schieten(int X,int Y){
+<<<<<<< HEAD
+     schietTargetX = X;
+     schietTargetY = Y;
+    }
+    
+    public void bazookaPakken(){
+        bazookaJN = true;
+    }
+=======
         System.out.println("testschieten vanuit HELD");
         System.out.println(this.looprichting);
         int targetPosX = 0;
@@ -84,4 +101,5 @@ public class Held extends Veldbezetting{
         schietTargetY = targetPosY;
     }
 
+>>>>>>> 66afe075fb2cd701a8231776356bbe8a372581eb
 }
