@@ -38,7 +38,6 @@ class Doolhof implements ActionListener {
     public Doolhof() {
         // maak een gameframe
         bord = new Bord(this);
-        System.out.println(bord);
         spelframe = new JFrame();
         spelframe.setTitle("Zoek je vriend!");
 

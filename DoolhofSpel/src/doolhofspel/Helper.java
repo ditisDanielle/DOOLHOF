@@ -19,7 +19,11 @@ public class Helper extends Tempbezetting {
         super.setImage(img.getImage());
         super.setPositie(12, 6);
         routeKaart = new Plattegrond("route.txt");
-        
+                
+    }
+    
+    public void setBordHelper(Bord bord){
+        this.bord = bord;
     }
 
     // waarden 1 nog vervangen door variabelenaam
@@ -66,6 +70,8 @@ public class Helper extends Tempbezetting {
     public void verdwijnen() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+   
     
     
        

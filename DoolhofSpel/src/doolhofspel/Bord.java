@@ -8,6 +8,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.ListIterator;
+import java.util.Set;
 import javax.swing.JPanel;
 
 /**
@@ -133,19 +137,22 @@ public class Bord extends JPanel implements ActionListener {
                 //System.out.println("Found bazooka!");
                 activeerSchietknop();
                 held.bazookaPakken();
-                changeImage(held.getVeldX() + stapX, held.getVeldY() + stapY, bazooka);
+                Gras gras = new Gras();
+                changeImage(held.getVeldX() + stapX, held.getVeldY() + stapY, bazooka, gras);
             }
 
             if (kaart.getMap(held.getVeldX() + stapX, held.getVeldY() + stapY) instanceof Valsspeler) {
                 //System.out.println("VALSSPELER!!");
                 valsspeler.waardeResetten();
-                changeImage(held.getVeldX() + stapX, held.getVeldY() + stapY, valsspeler);
+                Gras gras = new Gras();
+                changeImage(held.getVeldX() + stapX, held.getVeldY() + stapY, valsspeler, gras);
             }
 
             if (kaart.getMap(held.getVeldX() + stapX, held.getVeldY() + stapY) instanceof Helper) {
                 System.out.println("Helper!!");
+                Gras gras = new Gras();
+                changeImage(held.getVeldX() + stapX, held.getVeldY() + stapY, helper, gras);
                 routeTonen();
-                changeImage(held.getVeldX() + stapX, held.getVeldY() + stapY, helper);
 
             }
             if (!(kaart.getMap(held.getVeldX() + stapX, held.getVeldY() + stapY) instanceof Muur)) {
@@ -178,28 +185,23 @@ public class Bord extends JPanel implements ActionListener {
     /* 
      deze methode verandert een veldbezetting in gras of routeveld
      */
-    public void changeImage(int X, int Y, Veldbezetting veld) {
+    public void changeImage(int X, int Y, Veldbezetting veldOud, Veldbezetting Veldnieuw) {
         ArrayList copykaart = kaart.getMapObjects();
         int i = 0;
         while (i < copykaart.size()) {
-            Veldbezetting A = kaart.mapObjects.get(i);
+            Veldbezetting V = kaart.mapObjects.get(i);
 
-            int x = A.getX(i);
-            int y = A.getY(i);
+            int x = V.getX(i);
+            int y = V.getY(i);
             if (x == X && y == Y) {
-//                System.out.println("positie in arraylist copykaart " + (i));
-//                System.out.println("old image : " + copykaart.get(i));
                 copykaart.remove(i);
-                if (!(veld instanceof RouteVeld)) {
+                if (!(veldOud instanceof RouteVeld)) {
                     Gras gras = new Gras();
-                    copykaart.add(i, gras);
-                } else if (veld instanceof RouteVeld) {
+                     copykaart.add(i, gras);
+                } else if (veldOud instanceof RouteVeld) {
                     RouteVeld routeveld = new RouteVeld();
                     copykaart.add(i, routeveld);
-
                 }
-//                System.out.println("positie in arraylist copykaart " + (i));
-//                System.out.println("new image :" + copykaart.get(i));
             } else {
                 i++;
             }
@@ -207,34 +209,74 @@ public class Bord extends JPanel implements ActionListener {
         repaint();
     }
     
+    /*
+    deze methode gaat mbv een hashSet door de kaart met de route. Komt ie een routeveld tegen, 
+    dan wordt het gras in de kaart zonder route vervangen door een routeveld
+    */
     public void routeTonen() {
-
-        //System.out.println("route tonen");
+        System.out.println("route tonen");
         ArrayList routelist = routeKaart.getRouteObjects();
         ArrayList copykaart = kaart.getMapObjects();
-        for (int j = 0; j < copykaart.size(); j++) {
-            for (int i = 0; i < routelist.size(); i++) {
-                Veldbezetting A = routeKaart.routeObjects.get(i);
-                Veldbezetting B = kaart.mapObjects.get(j);
+       
+        Set<Veldbezetting> routeSet = new HashSet<>();
+        for (Object veld: routelist) {
+            
+            routeSet.add((Veldbezetting) veld);
+        }
+        
+        Iterator <Veldbezetting> iter = routeSet.iterator();
+        while (iter.hasNext()){
+          Veldbezetting A = iter.next();
+          if (A instanceof RouteVeld) {
+              System.out.println("routeveld gevonden");
+              int x = A.getX();
+            int y = A.getY();
+              System.out.println(A);
+              System.out.println(A.getX());
+              System.out.println(A.getY());
 
-                int x = A.getX(i);
-                int y = A.getY(i);
-                int a = B.getX(j);
-                int b = B.getY(j);
-                Image veld1 = A.getImage();
-                Image veld2 = B.getImage();
+                RouteVeld routeveld = new RouteVeld();
+                Gras gras = new Gras();
+               changeImage(x,y, gras, routeveld); //ALS IK DEZE AANROEP LOOPT DE BOEL VAST, dus helaas stukje dubbele code..
                 
- 
-
-                if (veld1.equals(veld2)) {
-                    RouteVeld routeveld = new RouteVeld();
-                    //System.out.println("temp" + temp);
-                    changeImage(x, y, routeveld);
-                }
-
+               
             }
         }
+        
+       
     }
+//    /*
+//    deze methode gaat mbv een iterarot door de kaart met de route. Komt ie een routeveld tegen, 
+//    dan wordt het gras in de kaart zonder route vervangen door een routeveld
+//    IK LOOP VAST OMDAT IK ER TE LANG OVER DOE
+//    */
+//    public void routeTonen() {
+//        System.out.println("route tonen");
+//        ArrayList routelist = routeKaart.getRouteObjects();
+//        
+//        ListIterator<Veldbezetting> iter = routelist.listIterator();
+//        while (iter.hasNext()){
+//          Veldbezetting A = iter.next();
+//          if (A instanceof RouteVeld) {
+//              System.out.println("routeveld gevonden");
+//              int x = A.getX();
+//            int y = A.getY();
+//              System.out.println(A);
+//              System.out.println(A.getX());
+//              System.out.println(A.getY());
+//
+//                RouteVeld routeveld = new RouteVeld();
+//                Gras gras = new Gras();
+//                changeImage(x,y, gras, routeveld);
+//
+//               
+//            }
+//        }
+//        
+//       
+//    }
+        
+    
 
     public void activeerSchietknop() {
         doolhof.switchVisibilitySchietknop(true);
@@ -264,7 +306,8 @@ public class Bord extends JPanel implements ActionListener {
                     held.schieten(tempX, tempY);
                     if ((kaart.getMap(held.getSchietTargetX(), held.getSchietTargetY()) instanceof Muur)) {
                         Muur muur = new Muur();
-                        changeImage(held.getSchietTargetX(), held.getSchietTargetY(), muur);
+                        Gras gras = new Gras();
+                        changeImage(held.getSchietTargetX(), held.getSchietTargetY(), muur, gras);
                         return;
                     }
                     //als target veld != muur, check volgende veld
@@ -288,7 +331,8 @@ public class Bord extends JPanel implements ActionListener {
                         activeerSchietActie(tempX, tempY);
                     }
                     Muur muur = new Muur();
-                    changeImage(held.getSchietTargetX(), held.getSchietTargetY(), muur);
+                    Gras gras = new Gras();
+                    changeImage(held.getSchietTargetX(), held.getSchietTargetY(), muur, gras);
                 }
             }
         }

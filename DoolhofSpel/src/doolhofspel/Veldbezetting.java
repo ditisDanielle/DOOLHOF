@@ -7,7 +7,7 @@ import java.awt.Image;
  * @author Agnita & Danielle (Groep 7)
  */
 
-public abstract class Veldbezetting {
+public abstract class Veldbezetting  {
     private Image afbeelding;
     private int veldX, veldY;
     
@@ -40,4 +40,20 @@ public abstract class Veldbezetting {
         return this.veldY;
     }
     
+    
+
+//    public int compareTo(Veldbezetting anderveld) {
+//        if (!(afbeelding.equals(anderveld.afbeelding))) {
+//            return -1;
+//        } else {
+//            return 0;
+//        }
+//    }
+
 }
+
+    
+
+    
+    
+
