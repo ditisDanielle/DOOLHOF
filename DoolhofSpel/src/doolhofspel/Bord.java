@@ -44,11 +44,9 @@ public class Bord extends JPanel implements ActionListener {
         addKeyListener(new PijltjesListener());
         setFocusable(true);
         this.doolhof = doolhof;
-        
+
         //printPosities(); // print alle veldbezettingen met hun indexnr en x en y
     }
-    
-    
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -185,7 +183,9 @@ public class Bord extends JPanel implements ActionListener {
     /* 
      deze methode verandert een veldbezetting in gras of routeveld
      */
-    public void changeImage(int X, int Y, Veldbezetting veldOud, Veldbezetting Veldnieuw) {
+    public void changeImage(int X, int Y, Veldbezetting veldOud, Veldbezetting veldNieuw) {
+        System.out.println("oud" + veldOud);
+        System.out.println("nieuw" + veldNieuw);
         ArrayList copykaart = kaart.getMapObjects();
         int i = 0;
         while (i < copykaart.size()) {
@@ -195,13 +195,15 @@ public class Bord extends JPanel implements ActionListener {
             int y = V.getY(i);
             if (x == X && y == Y) {
                 copykaart.remove(i);
-                if (!(veldOud instanceof RouteVeld)) {
+                if ((veldNieuw instanceof Gras)) {
                     Gras gras = new Gras();
-                     copykaart.add(i, gras);
-                } else if (veldOud instanceof RouteVeld) {
+                    copykaart.add(i, gras);
+                }else if (veldNieuw instanceof RouteVeld) {
+                    System.out.println("kom ik hier wel");
                     RouteVeld routeveld = new RouteVeld();
                     copykaart.add(i, routeveld);
                 }
+                i++;                
             } else {
                 i++;
             }
@@ -209,41 +211,37 @@ public class Bord extends JPanel implements ActionListener {
         repaint();
     }
     
+
     /*
-    deze methode gaat mbv een hashSet door de kaart met de route. Komt ie een routeveld tegen, 
-    dan wordt het gras in de kaart zonder route vervangen door een routeveld
-    */
+     deze methode gaat mbv een hashSet door de kaart met de route. Komt ie een routeveld tegen, 
+     dan wordt het gras in de kaart zonder route vervangen door een routeveld
+     */
     public void routeTonen() {
         System.out.println("route tonen");
         ArrayList routelist = routeKaart.getRouteObjects();
-        ArrayList copykaart = kaart.getMapObjects();
-       
+        // arraylist elementen aan set toewijzen
         Set<Veldbezetting> routeSet = new HashSet<>();
-        for (Object veld: routelist) {
-            
+        for (Object veld : routelist) {
             routeSet.add((Veldbezetting) veld);
         }
-        
-        Iterator <Veldbezetting> iter = routeSet.iterator();
-        while (iter.hasNext()){
-          Veldbezetting A = iter.next();
-          if (A instanceof RouteVeld) {
-              System.out.println("routeveld gevonden");
-              int x = A.getX();
-            int y = A.getY();
-              System.out.println(A);
-              System.out.println(A.getX());
-              System.out.println(A.getY());
-
+        //set doorlopen
+        Iterator<Veldbezetting> iter = routeSet.iterator();
+        while (iter.hasNext()) {
+            Veldbezetting A = iter.next();
+            if (A instanceof RouteVeld) {
+                System.out.println("routeveld gevonden");
+                int x = A.getX();
+                int y = A.getY();
+                System.out.println(A);
+                System.out.println(A.getX() + "," + A.getY());
                 RouteVeld routeveld = new RouteVeld();
                 Gras gras = new Gras();
-               changeImage(x,y, gras, routeveld); //ALS IK DEZE AANROEP LOOPT DE BOEL VAST, dus helaas stukje dubbele code..
-                
-               
+
+                changeImage(x, y, gras, routeveld); 
+
             }
         }
-        
-       
+
     }
 //    /*
 //    deze methode gaat mbv een iterarot door de kaart met de route. Komt ie een routeveld tegen, 
@@ -275,8 +273,6 @@ public class Bord extends JPanel implements ActionListener {
 //        
 //       
 //    }
-        
-    
 
     public void activeerSchietknop() {
         doolhof.switchVisibilitySchietknop(true);
@@ -345,8 +341,6 @@ public class Bord extends JPanel implements ActionListener {
     public static Plattegrond getKaart() {
         return kaart;
     }
-    
-    
 
     /*
      deze methode is een hulpmethode bij het programmeren en print alle veldbezettingen met hun indexnr en x en y 

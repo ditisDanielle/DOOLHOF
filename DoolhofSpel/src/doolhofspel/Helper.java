@@ -35,7 +35,8 @@ public class Helper extends Tempbezetting {
         return super.getY(1);
     }
 
-    // DEZE METHODE KRIJGEN WE NIET AAN DE PRAAT OMDAT WE CHANGEIMAGE() NIET KUNNEN AANROEPEN
+    // DEZE METHODE KRIJGEN WE NIET AAN DE PRAAT OMDAT WE CHANGEIMAGE() NIET KUNNEN AANROEPEN, daarom staat ie nu in klasse Bord..
+    // we weten dat dit anders hoort, maar we komen er niet uit.
     
 //    public void routeTonen() {
 //        
