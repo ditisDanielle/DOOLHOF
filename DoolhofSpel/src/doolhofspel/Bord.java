@@ -147,7 +147,7 @@ public class Bord extends JPanel implements ActionListener {
             }
 
             if (kaart.getMap(held.getVeldX() + stapX, held.getVeldY() + stapY) instanceof Helper) {
-                System.out.println("Helper!!");
+                //System.out.println("Helper!!");
                 Gras gras = new Gras();
                 changeImage(held.getVeldX() + stapX, held.getVeldY() + stapY, helper, gras);
                 routeTonen();
@@ -184,8 +184,8 @@ public class Bord extends JPanel implements ActionListener {
      deze methode verandert een veldbezetting in gras of routeveld
      */
     public void changeImage(int X, int Y, Veldbezetting veldOud, Veldbezetting veldNieuw) {
-        System.out.println("oud" + veldOud);
-        System.out.println("nieuw" + veldNieuw);
+       // System.out.println("oud " + veldOud);
+       // System.out.println("nieuw " + veldNieuw);
         ArrayList copykaart = kaart.getMapObjects();
         int i = 0;
         while (i < copykaart.size()) {
@@ -194,12 +194,16 @@ public class Bord extends JPanel implements ActionListener {
             int x = V.getX(i);
             int y = V.getY(i);
             if (x == X && y == Y) {
-                copykaart.remove(i);
-                if ((veldNieuw instanceof Gras)) {
+                //copykaart.remove(i);
+                if (!(veldNieuw instanceof RouteVeld)) {
+                    System.out.println( veldOud +" wordt" + veldNieuw);
+                    copykaart.remove(i);
                     Gras gras = new Gras();
                     copykaart.add(i, gras);
-                }else if (veldNieuw instanceof RouteVeld) {
-                    System.out.println("kom ik hier wel");
+                //}else if (veldNieuw instanceof RouteVeld) {
+                }else{ 
+                   System.out.println( veldOud +" wordt" + veldNieuw);
+                    copykaart.remove(i);
                     RouteVeld routeveld = new RouteVeld();
                     copykaart.add(i, routeveld);
                 }
@@ -229,13 +233,12 @@ public class Bord extends JPanel implements ActionListener {
         while (iter.hasNext()) {
             Veldbezetting A = iter.next();
             if (A instanceof RouteVeld) {
-                System.out.println("routeveld gevonden");
+                //als routeveld, haal x en y
                 int x = A.getX();
                 int y = A.getY();
-                System.out.println(A);
-                System.out.println(A.getX() + "," + A.getY());
+                
                 RouteVeld routeveld = new RouteVeld();
-                Gras gras = new Gras();
+                Gras gras = null;// = new Gras();
 
                 changeImage(x, y, gras, routeveld); 
 
@@ -243,36 +246,7 @@ public class Bord extends JPanel implements ActionListener {
         }
 
     }
-//    /*
-//    deze methode gaat mbv een iterarot door de kaart met de route. Komt ie een routeveld tegen, 
-//    dan wordt het gras in de kaart zonder route vervangen door een routeveld
-//    IK LOOP VAST OMDAT IK ER TE LANG OVER DOE
-//    */
-//    public void routeTonen() {
-//        System.out.println("route tonen");
-//        ArrayList routelist = routeKaart.getRouteObjects();
-//        
-//        ListIterator<Veldbezetting> iter = routelist.listIterator();
-//        while (iter.hasNext()){
-//          Veldbezetting A = iter.next();
-//          if (A instanceof RouteVeld) {
-//              System.out.println("routeveld gevonden");
-//              int x = A.getX();
-//            int y = A.getY();
-//              System.out.println(A);
-//              System.out.println(A.getX());
-//              System.out.println(A.getY());
-//
-//                RouteVeld routeveld = new RouteVeld();
-//                Gras gras = new Gras();
-//                changeImage(x,y, gras, routeveld);
-//
-//               
-//            }
-//        }
-//        
-//       
-//    }
+
 
     public void activeerSchietknop() {
         doolhof.switchVisibilitySchietknop(true);
@@ -326,7 +300,7 @@ public class Bord extends JPanel implements ActionListener {
                         }
                         activeerSchietActie(tempX, tempY);
                     }
-                    Muur muur = new Muur();
+                    Muur muur = null;//new Muur();
                     Gras gras = new Gras();
                     changeImage(held.getSchietTargetX(), held.getSchietTargetY(), muur, gras);
                 }
