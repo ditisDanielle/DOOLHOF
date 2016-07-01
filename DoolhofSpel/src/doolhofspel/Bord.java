@@ -1,6 +1,8 @@
 package doolhofspel;
 
+import static doolhofspel.Helper.routeKaart;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -14,9 +16,11 @@ import javax.swing.JPanel;
  */
 public class Bord extends JPanel implements ActionListener {
 
-    private Plattegrond kaart;
+    private static Plattegrond kaart;
+
     private Held held;
-    private int stappenteller;
+    private Helper helper;
+    private static int stappenteller;
     private Bazooka bazooka;
     private Vriend vriend;
     private Valsspeler valsspeler;
@@ -32,11 +36,15 @@ public class Bord extends JPanel implements ActionListener {
         valsspeler = new Valsspeler();
         bazooka = new Bazooka();
         vriend = new Vriend();
+        helper = new Helper();
         addKeyListener(new PijltjesListener());
         setFocusable(true);
         this.doolhof = doolhof;
+        
         //printPosities(); // print alle veldbezettingen met hun indexnr en x en y
     }
+    
+    
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -114,30 +122,31 @@ public class Bord extends JPanel implements ActionListener {
                 stapY = 0;
             }
             if (kaart.getMap(held.getVeldX() + stapX, held.getVeldY() + stapY) instanceof Held) {
-                System.out.println("Niet lopen, je zit bij de start");
-            } 
-            
+                //System.out.println("Niet lopen, je zit bij de start");
+            }
+
             if (kaart.getMap(held.getVeldX() + stapX, held.getVeldY() + stapY) instanceof Vriend) {
-                System.out.println("Vriend gevonden!!!");
+                //System.out.println("Vriend gevonden!!!");
                 eindeSpelKnop();
             }
             if (kaart.getMap(held.getVeldX() + stapX, held.getVeldY() + stapY) instanceof Bazooka) {
                 //System.out.println("Found bazooka!");
                 activeerSchietknop();
                 held.bazookaPakken();
-                int bazookaX = held.getVeldX() + stapX;
-                int bazookaY = held.getVeldY() + stapY;
-                changeImage(bazookaX, bazookaY);
+                changeImage(held.getVeldX() + stapX, held.getVeldY() + stapY, bazooka);
             }
+
+            if (kaart.getMap(held.getVeldX() + stapX, held.getVeldY() + stapY) instanceof Valsspeler) {
+                //System.out.println("VALSSPELER!!");
+                valsspeler.waardeResetten();
+                changeImage(held.getVeldX() + stapX, held.getVeldY() + stapY, valsspeler);
+            }
+
             if (kaart.getMap(held.getVeldX() + stapX, held.getVeldY() + stapY) instanceof Helper) {
                 System.out.println("Helper!!");
-                int helperX = held.getVeldX() + stapX;
-                int helperY = held.getVeldY() + stapY;
-                changeImage(helperX, helperY);
-            }
-            if (kaart.getMap(held.getVeldX() + stapX, held.getVeldY() + stapY) instanceof Valsspeler) {
-                System.out.println("VALSSPELER!!");
-                stappenteller = stappenteller - 20;
+                routeTonen();
+                changeImage(held.getVeldX() + stapX, held.getVeldY() + stapY, helper);
+
             }
             if (!(kaart.getMap(held.getVeldX() + stapX, held.getVeldY() + stapY) instanceof Muur)) {
                 held.lopen(stapX, stapY);
@@ -158,19 +167,37 @@ public class Bord extends JPanel implements ActionListener {
         }
     }
 
-    public void changeImage(int X, int Y) {
+    public static int getStappen() {
+        return stappenteller;
+    }
+
+    public static void setStappenTeller(int stappen) {
+        stappenteller = stappen;
+    }
+
+    /* 
+     deze methode verandert een veldbezetting in gras of routeveld
+     */
+    public void changeImage(int X, int Y, Veldbezetting veld) {
         ArrayList copykaart = kaart.getMapObjects();
         int i = 0;
         while (i < copykaart.size()) {
             Veldbezetting A = kaart.mapObjects.get(i);
+
             int x = A.getX(i);
             int y = A.getY(i);
             if (x == X && y == Y) {
 //                System.out.println("positie in arraylist copykaart " + (i));
 //                System.out.println("old image : " + copykaart.get(i));
                 copykaart.remove(i);
-                Gras gras = new Gras();
-                copykaart.add(i, gras);
+                if (!(veld instanceof RouteVeld)) {
+                    Gras gras = new Gras();
+                    copykaart.add(i, gras);
+                } else if (veld instanceof RouteVeld) {
+                    RouteVeld routeveld = new RouteVeld();
+                    copykaart.add(i, routeveld);
+
+                }
 //                System.out.println("positie in arraylist copykaart " + (i));
 //                System.out.println("new image :" + copykaart.get(i));
             } else {
@@ -178,6 +205,35 @@ public class Bord extends JPanel implements ActionListener {
             }
         }
         repaint();
+    }
+    
+    public void routeTonen() {
+
+        //System.out.println("route tonen");
+        ArrayList routelist = routeKaart.getRouteObjects();
+        ArrayList copykaart = kaart.getMapObjects();
+        for (int j = 0; j < copykaart.size(); j++) {
+            for (int i = 0; i < routelist.size(); i++) {
+                Veldbezetting A = routeKaart.routeObjects.get(i);
+                Veldbezetting B = kaart.mapObjects.get(j);
+
+                int x = A.getX(i);
+                int y = A.getY(i);
+                int a = B.getX(j);
+                int b = B.getY(j);
+                Image veld1 = A.getImage();
+                Image veld2 = B.getImage();
+                
+ 
+
+                if (veld1.equals(veld2)) {
+                    RouteVeld routeveld = new RouteVeld();
+                    //System.out.println("temp" + temp);
+                    changeImage(x, y, routeveld);
+                }
+
+            }
+        }
     }
 
     public void activeerSchietknop() {
@@ -204,47 +260,55 @@ public class Bord extends JPanel implements ActionListener {
         if (tempX < 21 || tempX < 21) {
             if (tempX >= 0) {
                 if (tempY >= 0) {
-                // ophalen target
-                held.schieten(tempX, tempY);
-                if ((kaart.getMap(held.getSchietTargetX(), held.getSchietTargetY()) instanceof Muur)) {
-                    changeImage(held.getSchietTargetX(), held.getSchietTargetY());
-                    return;
+                    // ophalen target
+                    held.schieten(tempX, tempY);
+                    if ((kaart.getMap(held.getSchietTargetX(), held.getSchietTargetY()) instanceof Muur)) {
+                        Muur muur = new Muur();
+                        changeImage(held.getSchietTargetX(), held.getSchietTargetY(), muur);
+                        return;
+                    }
+                    //als target veld != muur, check volgende veld
+                    if (!(kaart.getMap(held.getSchietTargetX(), held.getSchietTargetY()) instanceof Muur)) {
+                        if (held.getRichting().equals("right")) {
+                            tempX++;
+                            held.schieten(tempX, tempY);
+                        }
+                        if (held.getRichting().equals("left")) {
+                            tempX--;
+                            held.schieten(tempX, tempY);
+                        }
+                        if (held.getRichting().equals("up")) {
+                            tempY--;
+                            held.schieten(tempX, tempY);
+                        }
+                        if (held.getRichting().equals("down")) {
+                            tempY++;
+                            held.schieten(tempX, tempY);
+                        }
+                        activeerSchietActie(tempX, tempY);
+                    }
+                    Muur muur = new Muur();
+                    changeImage(held.getSchietTargetX(), held.getSchietTargetY(), muur);
                 }
-                //als target veld != muur, check volgende veld
-                if (!(kaart.getMap(held.getSchietTargetX(), held.getSchietTargetY()) instanceof Muur)) {
-                    if (held.getRichting().equals("right")) {
-                        tempX++;
-                        held.schieten(tempX, tempY);
-                    }
-                    if (held.getRichting().equals("left")) {
-                        tempX--;
-                        held.schieten(tempX, tempY);
-                    }
-                    if (held.getRichting().equals("up")) {
-                        tempY--;
-                        held.schieten(tempX, tempY);
-                    }
-                    if (held.getRichting().equals("down")) {
-                        tempY++;
-                        held.schieten(tempX, tempY);
-                    }
-                    activeerSchietActie(tempX, tempY);
-                }
-                    changeImage(held.getSchietTargetX(), held.getSchietTargetY());
-                }    
             }
-        }    
+        }
     }
-    
-    public void eindeSpelKnop() { 
+
+    public void eindeSpelKnop() {
         doolhof.eindeSpelKnop();
     }
+
+    public static Plattegrond getKaart() {
+        return kaart;
+    }
+    
+    
 
     /*
      deze methode is een hulpmethode bij het programmeren en print alle veldbezettingen met hun indexnr en x en y 
      activeren in regel 37
      */
-    public void printPosities() {
+    public static void printPosities() {
         ArrayList tempprint = kaart.getMapObjects();
         int x = 0;
         int y = 0;
@@ -254,9 +318,8 @@ public class Bord extends JPanel implements ActionListener {
             y = A.getY(i);
             String pos = Integer.toString(x) + Integer.toString(y);
             System.out.println(pos);
-//            int index = Integer.parseInt(pos);
             System.out.println("pos :" + i + "/stringxy " + pos + " object= " + tempprint.get(i) + " x: " + x + "y: " + y);
         }
     }
-    
+
 }

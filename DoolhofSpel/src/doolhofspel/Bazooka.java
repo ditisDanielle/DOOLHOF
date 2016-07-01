@@ -16,5 +16,12 @@ public class Bazooka extends Tempbezetting {
         super.setPositie(1,1);
     }
     
+    // deze methode zou changeImage moeten aanroepen op Bord, maar we komen dan met de static en non-static in de knoei.
+    // we weten dus dat het anders moet maar hebben geen tijd gehad om dit te fixen.
+    @Override
+    public void verdwijnen() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }
 

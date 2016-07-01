@@ -1,5 +1,7 @@
 package doolhofspel;
 
+import java.awt.Image;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
 /**
@@ -8,12 +10,16 @@ import javax.swing.ImageIcon;
  */
 
 public class Helper extends Tempbezetting {
+    public static Plattegrond routeKaart;
+    Bord bord;
+    
 
     public Helper() {
         ImageIcon img = new ImageIcon("Pictures//helper.png");
         super.setImage(img.getImage());
         super.setPositie(12, 6);
-
+        routeKaart = new Plattegrond("route.txt");
+        
     }
 
     // waarden 1 nog vervangen door variabelenaam
@@ -25,15 +31,42 @@ public class Helper extends Tempbezetting {
         return super.getY(1);
     }
 
-    public void routeTonen() {
-        // pseudo code kortste route berekenen (staat natuurlijk niet op de goede plek, maar for now
-        // het is niet van belang om te beginnen met de kortste route, we gaan de route bereken naar de vriend
-        // kijk bij elke stap wat er op je pad zit, dus ook of je meerdere wegen kan inslaan
-        // bij het kunnen inslaan van meerdere wegen, sla je op waar dat was (kruispunt)
-        // kom je bij een doodlopende route, dan terug naar het kruispunt, en de andere route gaan lopen
-        // zodra je de vriend gevonden hebt is dat de kortste route, en die sla je op
-        // indien mogelijk ga je terug naar het laatste kruispunt, waar je minimaal twee mogelijke routes had
-        // repeat, en overschrijf de kortste route telkens als die korter is dan de opgeslagen route
-        // geen kruispunten meer, dan heb je de kortste route, die kun je dan "tekenen"
+    // DEZE METHODE KRIJGEN WE NIET AAN DE PRAAT OMDAT WE CHANGEIMAGE() NIET KUNNEN AANROEPEN
+    
+//    public void routeTonen() {
+//        
+//               System.out.println("route tonen");
+//        ArrayList routelist = routeKaart.getRouteObjects();
+//        int i = 0;
+//        while (i < routelist.size()) {
+//            Veldbezetting A = routeKaart.routeObjects.get(i);
+//            
+//            int x = A.getX(i);
+//            int y = A.getY(i);
+//            Image veld = A.getImage();
+//            if (veld.equals("Pictures//route.png")) {
+//                RouteVeld routeveld = new RouteVeld();
+//                //System.out.println("temp" + temp);
+//                bord.changeImage(x,y, routeveld );
+//                System.out.println(bord);
+//
+//                
+//            } else {
+//                i++;
+//            }
+//        }
+      
+//    }
+    
+    
+    
+    // deze methode zou changeImage moeten aanroepen op Bord, maar we komen dan met de static en non-static in de knoei.
+    // we weten dus dat het anders moet maar hebben geen tijd gehad om dit te fixen.
+    @Override
+    public void verdwijnen() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    
+       
 }
